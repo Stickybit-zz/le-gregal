@@ -1,0 +1,117 @@
+---
+layout: base.njk
+title: Chronologie
+bodyClass: page-chronologie
+---
+
+<div class="page-header">
+  <h1>Chronologie</h1>
+  <p>{{ site.post_count }} billets · {{ site.first_post }} → {{ site.last_post }}</p>
+</div>
+
+<div class="chrono-filters">
+  <label for="search-input">Rechercher :</label>
+  <input type="search" id="search-input" placeholder="Titre, lieu…" aria-label="Rechercher un billet">
+  <div class="filter-categories">
+    <button class="filter-btn active" data-cat="">Tout</button>
+    <button class="filter-btn" data-cat="Traversées">Traversées</button>
+    <button class="filter-btn" data-cat="Escales et terres nouvelles">Escales</button>
+    <button class="filter-btn" data-cat="Vidéos">Vidéos</button>
+    <button class="filter-btn" data-cat="La dure vie du marin">Vie du bord</button>
+  </div>
+</div>
+
+<ol class="timeline" id="timeline-list">
+{% set currentYear = "" %}
+{% set currentMonth = "" %}
+{% for post in collections.posts %}
+  {% set postYear = post.published | year %}
+  {% set postMonth = post.published | monthYear %}
+
+  {% if postYear != currentYear %}
+    {% if currentYear != "" %}</ul></li>{% endif %}
+    <li class="timeline-year" data-year="{{ postYear }}">
+      <h2 class="year-label">{{ postYear }}</h2>
+      <ul class="year-posts">
+    {% set currentYear = postYear %}
+    {% set currentMonth = "" %}
+  {% endif %}
+
+  {% if postMonth != currentMonth %}
+    {% if currentMonth != "" %}</ul></li>{% endif %}
+    <li class="timeline-month">
+      <h3 class="month-label">{{ postMonth }}</h3>
+      <ul class="month-posts">
+    {% set currentMonth = postMonth %}
+  {% endif %}
+
+  <li class="timeline-post"
+      data-title="{{ post.title | lower }}"
+      data-cats="{{ post.categories | join(',') | lower }}">
+    <article class="timeline-card">
+      <time datetime="{{ post.published | dateISO }}" class="post-date">
+        {{ post.published | dateDisplay }}
+      </time>
+      <div class="timeline-card-body">
+        <h4><a href="/{{ post.slug }}/">{{ post.title }}</a></h4>
+        <div class="timeline-meta">
+          <span class="tl-author">{{ post.author }}</span>
+          {% if post.categories.length %}
+          <span class="tl-cats">
+            {% for cat in post.categories %}
+              <a href="/etapes/{{ cat | slugify }}/" class="category-tag small">{{ cat }}</a>
+            {% endfor %}
+          </span>
+          {% endif %}
+          {% if post.gps %}<span class="tl-gps" title="Position GPS">📍</span>{% endif %}
+          {% if post.comment_count > 0 %}
+          <span class="tl-comments">💬 {{ post.comment_count }}</span>
+          {% endif %}
+        </div>
+        <p class="tl-excerpt">{{ post.content | excerpt(180) }}</p>
+      </div>
+    </article>
+  </li>
+
+{% endfor %}
+</ul></li></ul></li>
+</ol>
+
+<script>
+(function() {
+  const searchInput = document.getElementById('search-input');
+  const filterBtns  = document.querySelectorAll('.filter-btn');
+  const posts       = document.querySelectorAll('.timeline-post');
+  const yearItems   = document.querySelectorAll('.timeline-year');
+
+  let activeFilter = '';
+
+  function applyFilters() {
+    const query = searchInput.value.toLowerCase().trim();
+
+    posts.forEach(post => {
+      const titleMatch = !query || post.dataset.title.includes(query);
+      const catMatch   = !activeFilter || post.dataset.cats.includes(activeFilter.toLowerCase());
+      post.style.display = (titleMatch && catMatch) ? '' : 'none';
+    });
+
+    // Masque les années/mois vides
+    yearItems.forEach(yearEl => {
+      const visible = [...yearEl.querySelectorAll('.timeline-post')]
+        .some(p => p.style.display !== 'none');
+      yearEl.style.display = visible ? '' : 'none';
+    });
+  }
+
+  searchInput.addEventListener('input', applyFilters);
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.cat;
+      applyFilters();
+    });
+  });
+})();
+</script>

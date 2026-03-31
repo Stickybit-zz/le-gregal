@@ -1,0 +1,17 @@
+{
+  "name": "le-gregal",
+  "version": "1.0.0",
+  "description": "Carnet de bord du Grégal - site statique",
+  "type": "module",
+  "scripts": {
+    "parse":  "python3 build/parse_atom.py",
+    "build":  "npx @11ty/eleventy",
+    "dev":    "npx @11ty/eleventy --serve",
+    "deploy": "npm run parse && npm run build"
+  },
+  "author": "Tom & Aude",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}

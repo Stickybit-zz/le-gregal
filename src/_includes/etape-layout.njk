@@ -1,0 +1,82 @@
+---
+layout: base.njk
+leaflet: true
+---
+
+<div class="page-header">
+  <a href="/etapes/" class="back-link">← Toutes les étapes</a>
+  <h1>{{ categoryName }}</h1>
+  <p>{{ postCount }} billet{% if postCount > 1 %}s{% endif %}</p>
+</div>
+
+{% if gpsCenter != "null" %}
+<div id="etape-map" class="etape-map"
+  data-center="{{ gpsCenter }}"
+  data-slug="{{ etapeSlug }}">
+</div>
+{% endif %}
+
+<ol class="etape-posts-list">
+{% for post in etapePosts %}
+<li class="etape-post-item">
+  <article class="timeline-card">
+    <time datetime="{{ post.published }}" class="post-date">{{ post.published | dateDisplay }}</time>
+    <div class="timeline-card-body">
+      <h3><a href="/{{ post.slug }}/">{{ post.title }}</a></h3>
+      {% if post.gps %}<span class="tl-gps">📍</span>{% endif %}
+      <p class="tl-excerpt">{{ post.excerpt }}</p>
+    </div>
+  </article>
+</li>
+{% endfor %}
+</ol>
+
+{% block scripts %}
+<script>
+(function() {
+  const mapEl = document.getElementById('etape-map');
+  if (!mapEl) return;
+
+  const center = JSON.parse(mapEl.dataset.center || 'null');
+  if (!center) return;
+
+  const map = L.map('etape-map').setView(center, 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 18
+  }).addTo(map);
+
+  // Route globale en fond
+  fetch('/data/track.json')
+    .then(r => r.json())
+    .then(track => {
+      L.polyline(track.map(p => [p.lat, p.lon]), {
+        color: '#2c7bb6', weight: 2, opacity: 0.3
+      }).addTo(map);
+
+      // Points GPS de cette étape
+      const slug = mapEl.dataset.slug;
+      const etapePoints = track.filter(p =>
+        p.slug && p.slug.includes(slug.split('-')[0])
+      );
+      if (etapePoints.length) {
+        const markerIcon = L.divIcon({
+          className: 'map-marker',
+          html: '<div class="marker-dot active"></div>',
+          iconSize: [14, 14],
+          iconAnchor: [7, 7],
+        });
+        etapePoints.forEach(p => {
+          const date = new Date(p.published).toLocaleDateString('fr-FR', {
+            day: 'numeric', month: 'long', year: 'numeric'
+          });
+          L.marker([p.lat, p.lon], { icon: markerIcon })
+            .bindPopup(`<a href="/${p.slug}/">${p.title}</a><br><time>${date}</time>`)
+            .addTo(map);
+        });
+        map.fitBounds(L.latLngBounds(etapePoints.map(p => [p.lat, p.lon])).pad(0.3));
+      }
+    });
+})();
+</script>
+{% endblock %}
