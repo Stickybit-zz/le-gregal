@@ -7,7 +7,7 @@
   <meta name="description" content="{% if description %}{{ description }}{% else %}Carnet de bord de Tom &amp; Aude — Méditerranée, Atlantique, Antilles, 2008-2009{% endif %}">
   <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
   {% if leaflet %}
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   {% endif %}
   <link rel="icon" href="{{ '/photos/le-gregal.jpg' | url }}" type="image/jpeg">
 </head>
@@ -52,7 +52,7 @@
   </script>
 
   {% if leaflet %}
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLcE=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   {% endif %}
   {% block scripts %}{% endblock %}
 </body>
