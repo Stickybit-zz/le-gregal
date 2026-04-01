@@ -15,7 +15,7 @@ bodyClass: page-etapes
 <div class="etapes-grid">
 {% for cat in categories %}
 <article class="etape-card">
-  <a href="/etapes/{{ cat.slug }}/" class="etape-card-link">
+  <a href="{{ ('/etapes/' + cat.slug + '/') | url }}" class="etape-card-link">
     <h2 class="etape-name">{{ cat.name }}</h2>
     <div class="etape-meta">
       <span class="etape-count">{{ cat.post_count }} billet{% if cat.post_count > 1 %}s{% endif %}</span>
@@ -35,7 +35,8 @@ bodyClass: page-etapes
 
   map.on('click', () => map.scrollWheelZoom.enable());
 
-  fetch('/data/track.json')
+  {% set trackUrl = '/data/track.json' | url %}
+  fetch('{{ trackUrl }}')
     .then(r => r.json())
     .then(track => {
       if (!track.length) return;
