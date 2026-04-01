@@ -8,7 +8,10 @@ const __dirname = dirname(__filename);
 export default function (eleventyConfig) {
 
   // ── Passthrough copies ────────────────────────────────────────────────────
-  eleventyConfig.addPassthroughCopy("static");
+  eleventyConfig.addPassthroughCopy({ "static/css":    "css"    });
+  eleventyConfig.addPassthroughCopy({ "static/js":     "js"     });
+  eleventyConfig.addPassthroughCopy({ "static/photos": "photos" });
+  eleventyConfig.addPassthroughCopy({ "static/videos": "videos" });
   eleventyConfig.addPassthroughCopy({ "src/_data/*.json": "data" });
 
   // ── Filters ───────────────────────────────────────────────────────────────
