@@ -546,7 +546,7 @@ main {
 /* ── Page À propos ────────────────────────────────────────────────────────── */
 .about-content { max-width: 680px; }
 .about-photo { margin-bottom: 2rem; }
-.about-photo img { max-height: 360px; object-fit: cover; width: 100%; }
+.about-photo img { max-width: 100%; height: auto; display: block; border-radius: var(--radius); }
 .about-content section { margin-bottom: 2rem; }
 .about-content h2 { font-size: 1.3rem; color: var(--sea-dark); margin-bottom: .75rem; }
 .about-content p { margin-bottom: .75rem; }
