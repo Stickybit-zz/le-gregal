@@ -12,23 +12,23 @@ permalink: "/{{ post.slug }}/index.html"
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ post.title }} — Le Grégal</title>
   <meta name="description" content="{{ post.title }}">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <link rel="icon" href="/photos/le-gregal.jpg" type="image/jpeg">
+  <link rel="icon" href="{{ '/photos/le-gregal.jpg' | url }}" type="image/jpeg">
 </head>
 <body>
 
   <header class="site-header">
     <div class="header-inner">
-      <a href="/" class="site-logo">
+      <a href="{{ '/' | url }}" class="site-logo">
         <span class="logo-anchor">⚓</span>
         <span class="logo-text">Le Grégal</span>
       </a>
       <nav class="site-nav">
-        <a href="/">Carte</a>
-        <a href="/chronologie/">Chronologie</a>
-        <a href="/etapes/">Étapes</a>
-        <a href="/a-propos/">À propos</a>
+        <a href="{{ '/' | url }}">Carte</a>
+        <a href="{{ '/chronologie/' | url }}">Chronologie</a>
+        <a href="{{ '/etapes/' | url }}">Étapes</a>
+        <a href="{{ '/a-propos/' | url }}">À propos</a>
       </nav>
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -44,7 +44,7 @@ permalink: "/{{ post.slug }}/index.html"
         <div class="post-meta-top">
           <div class="post-categories">
             {% for cat in post.categories %}
-              <a href="/etapes/{{ cat | slugify }}/" class="category-tag">{{ cat }}</a>
+              <a href="{{ ('/etapes/' + (cat | slugify) + '/') | url }}" class="category-tag">{{ cat }}</a>
             {% endfor %}
           </div>
         </div>
@@ -85,18 +85,14 @@ permalink: "/{{ post.slug }}/index.html"
       </div>
 
       <nav class="post-nav">
-        {% set prevPost = pagination.previousPageHref %}
-        {% set nextPost = pagination.nextPageHref %}
         {% if pagination.previousPageHref %}
         <a href="{{ pagination.previousPageHref }}" class="post-nav-prev">
           <span class="nav-label">← Précédent</span>
-          <span class="nav-title">{{ pagination.previousPageHref }}</span>
         </a>
         {% endif %}
         {% if pagination.nextPageHref %}
         <a href="{{ pagination.nextPageHref }}" class="post-nav-next">
           <span class="nav-label">Suivant →</span>
-          <span class="nav-title">{{ pagination.nextPageHref }}</span>
         </a>
         {% endif %}
       </nav>
@@ -143,6 +139,7 @@ permalink: "/{{ post.slug }}/index.html"
   </script>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLcE=" crossorigin=""></script>
+  {% set trackUrl = '/data/track.json' | url %}
   <script>
   (function() {
     const mapEl = document.getElementById('post-map');
@@ -158,8 +155,7 @@ permalink: "/{{ post.slug }}/index.html"
       maxZoom: 18
     }).addTo(map);
 
-    // Route globale en fond
-    fetch('/data/track.json')
+    fetch('{{ trackUrl }}')
       .then(r => r.json())
       .then(track => {
         L.polyline(track.map(p => [p.lat, p.lon]), {
@@ -167,7 +163,6 @@ permalink: "/{{ post.slug }}/index.html"
         }).addTo(map);
       });
 
-    // Marqueur position du billet
     const icon = L.divIcon({
       className: 'map-marker-post',
       html: '<div class="marker-dot" style="width:14px;height:14px;background:#c0392b;border-color:#fff;border-width:3px"></div>',

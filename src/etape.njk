@@ -11,19 +11,19 @@ permalink: "/etapes/{{ category.slug }}/index.html"
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ category.name }} — Le Grégal</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <link rel="icon" href="/photos/le-gregal.jpg" type="image/jpeg">
+  <link rel="icon" href="{{ '/photos/le-gregal.jpg' | url }}" type="image/jpeg">
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a href="/" class="site-logo"><span class="logo-anchor">⚓</span><span class="logo-text">Le Grégal</span></a>
+      <a href="{{ '/' | url }}" class="site-logo"><span class="logo-anchor">⚓</span><span class="logo-text">Le Grégal</span></a>
       <nav class="site-nav">
-        <a href="/">Carte</a>
-        <a href="/chronologie/">Chronologie</a>
-        <a href="/etapes/">Étapes</a>
-        <a href="/a-propos/">À propos</a>
+        <a href="{{ '/' | url }}">Carte</a>
+        <a href="{{ '/chronologie/' | url }}">Chronologie</a>
+        <a href="{{ '/etapes/' | url }}">Étapes</a>
+        <a href="{{ '/a-propos/' | url }}">À propos</a>
       </nav>
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -33,7 +33,7 @@ permalink: "/etapes/{{ category.slug }}/index.html"
 
   <main>
     <div class="page-header">
-      <a href="/etapes/" class="back-link">← Toutes les étapes</a>
+      <a href="{{ '/etapes/' | url }}" class="back-link">← Toutes les étapes</a>
       <h1>{{ category.name }}</h1>
       <p>{{ category.post_count }} billet{% if category.post_count > 1 %}s{% endif %}</p>
     </div>
@@ -51,7 +51,7 @@ permalink: "/etapes/{{ category.slug }}/index.html"
       <article class="timeline-card">
         <time datetime="{{ post.published | dateISO }}" class="post-date">{{ post.published | dateDisplay }}</time>
         <div class="timeline-card-body">
-          <h3><a href="/{{ post.slug }}/">{{ post.title }}</a></h3>
+          <h3><a href="{{ ('/' + post.slug + '/') | url }}">{{ post.title }}</a></h3>
           <div class="timeline-meta">
             {% if post.gps %}<span class="tl-gps">📍</span>{% endif %}
           </div>
@@ -78,6 +78,7 @@ permalink: "/etapes/{{ category.slug }}/index.html"
   });
   </script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLcE=" crossorigin=""></script>
+  {% set trackUrl = '/data/track.json' | url %}
   <script>
   (function() {
     const mapEl = document.getElementById('etape-map');
@@ -92,7 +93,7 @@ permalink: "/etapes/{{ category.slug }}/index.html"
       maxZoom: 18
     }).addTo(map);
 
-    fetch('/data/track.json')
+    fetch('{{ trackUrl }}')
       .then(r => r.json())
       .then(track => {
         L.polyline(track.map(p => [p.lat, p.lon]), {

@@ -104,6 +104,7 @@ export default function (eleventyConfig) {
 
   // ── Options Eleventy ──────────────────────────────────────────────────────
   return {
+    pathPrefix: "/le-gregal/",
     dir: {
       input:    "src",
       output:   "_site",

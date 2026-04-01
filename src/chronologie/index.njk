@@ -53,13 +53,13 @@ bodyClass: page-chronologie
         {{ post.published | dateDisplay }}
       </time>
       <div class="timeline-card-body">
-        <h4><a href="/{{ post.slug }}/">{{ post.title }}</a></h4>
+        <h4><a href="{{ ('/' + post.slug + '/') | url }}">{{ post.title }}</a></h4>
         <div class="timeline-meta">
           <span class="tl-author">{{ post.author }}</span>
           {% if post.categories.length %}
           <span class="tl-cats">
             {% for cat in post.categories %}
-              <a href="/etapes/{{ cat | slugify }}/" class="category-tag small">{{ cat }}</a>
+              <a href="{{ ('/etapes/' + (cat | slugify) + '/') | url }}" class="category-tag small">{{ cat }}</a>
             {% endfor %}
           </span>
           {% endif %}

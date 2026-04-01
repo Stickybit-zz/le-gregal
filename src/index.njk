@@ -33,7 +33,7 @@ bodyClass: page-home
         <time datetime="{{ post.published | dateISO }}">{{ post.published | dateDisplay }}</time>
         <span class="post-card-author">{{ post.author }}</span>
       </div>
-      <h3><a href="/{{ post.slug }}/">{{ post.title }}</a></h3>
+      <h3><a href="{{ ('/' + post.slug + '/') | url }}">{{ post.title }}</a></h3>
       <p class="post-card-excerpt">{{ post.content | excerpt(160) }}</p>
       {% if post.gps %}
       <span class="post-card-gps" title="Position GPS">📍</span>
@@ -41,9 +41,11 @@ bodyClass: page-home
     </article>
     {% endfor %}
   </div>
-  <p class="all-posts-link"><a href="/chronologie/">Tous les {{ site.post_count }} billets →</a></p>
+  <p class="all-posts-link"><a href="{{ '/chronologie/' | url }}">Tous les {{ site.post_count }} billets →</a></p>
 </section>
 
+{% set trackUrl = '/data/track.json' | url %}
+{% set baseUrl = '/' | url %}
 <script>
 (function() {
   const map = L.map('global-map', {
@@ -56,16 +58,14 @@ bodyClass: page-home
     maxZoom: 18
   }).addTo(map);
 
-  // Active scroll zoom au clic sur la carte
   map.on('click', function() { map.scrollWheelZoom.enable(); });
   map.on('blur',  function() { map.scrollWheelZoom.disable(); });
 
-  fetch('/data/track.json')
+  fetch('{{ trackUrl }}')
     .then(r => r.json())
     .then(track => {
       if (!track.length) return;
 
-      // Ligne de route
       const coords = track.map(p => [p.lat, p.lon]);
       L.polyline(coords, {
         color: '#2c7bb6',
@@ -74,7 +74,6 @@ bodyClass: page-home
         lineJoin: 'round'
       }).addTo(map);
 
-      // Marqueurs cliquables
       const markerIcon = L.divIcon({
         className: 'map-marker',
         html: '<div class="marker-dot"></div>',
@@ -82,6 +81,7 @@ bodyClass: page-home
         iconAnchor: [6, 6],
       });
 
+      const base = '{{ baseUrl }}';
       track.forEach(point => {
         const date = new Date(point.published).toLocaleDateString('fr-FR', {
           day: 'numeric', month: 'long', year: 'numeric'
@@ -90,14 +90,13 @@ bodyClass: page-home
           .bindPopup(
             `<div class="map-popup">
               <time>${date}</time>
-              <a href="/${point.slug}/">${point.title}</a>
+              <a href="${base}${point.slug}/">${point.title}</a>
             </div>`,
             { maxWidth: 220 }
           )
           .addTo(map);
       });
 
-      // Ajuste la vue sur tous les points
       map.fitBounds(L.latLngBounds(coords).pad(0.1));
     });
 })();
