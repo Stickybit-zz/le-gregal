@@ -86,12 +86,12 @@ permalink: "/{{ post.slug }}/index.html"
 
       <nav class="post-nav">
         {% if pagination.previousPageHref %}
-        <a href="{{ pagination.previousPageHref }}" class="post-nav-prev">
+        <a href="{{ pagination.previousPageHref | url }}" class="post-nav-prev">
           <span class="nav-label">← Précédent</span>
         </a>
         {% endif %}
         {% if pagination.nextPageHref %}
-        <a href="{{ pagination.nextPageHref }}" class="post-nav-next">
+        <a href="{{ pagination.nextPageHref | url }}" class="post-nav-next">
           <span class="nav-label">Suivant →</span>
         </a>
         {% endif %}
