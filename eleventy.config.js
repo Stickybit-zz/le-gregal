@@ -25,12 +25,6 @@ export default function (eleventyConfig) {
     });
   });
 
-  // Format date courte
-  eleventyConfig.addFilter("dateShort", (dateStr) => {
-    if (!dateStr) return "";
-    return dateStr.slice(0, 10);
-  });
-
   // Format date pour <time datetime="">
   eleventyConfig.addFilter("dateISO", (dateStr) => {
     if (!dateStr) return "";
@@ -57,9 +51,6 @@ export default function (eleventyConfig) {
     return text.length > length ? text.slice(0, length) + "…" : text;
   });
 
-  // JSON safe pour injection dans scripts
-  eleventyConfig.addFilter("jsonify", (val) => JSON.stringify(val));
-
   // Slug depuis un titre (pour ancres)
   eleventyConfig.addFilter("slugify", (str) => {
     return (str || "")
@@ -68,9 +59,6 @@ export default function (eleventyConfig) {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "");
   });
-
-  // Index dans un tableau
-  eleventyConfig.addFilter("indexOf", (arr, val) => arr.indexOf(val));
 
   // Commentaires d'un post donné
   eleventyConfig.addFilter("commentsFor", (commentsMap, postId) => {
@@ -91,18 +79,6 @@ export default function (eleventyConfig) {
     return JSON.parse(
       readFileSync(join(__dirname, "src/_data/categories.json"), "utf-8")
     );
-  });
-
-  // ── Shortcodes ────────────────────────────────────────────────────────────
-
-  // Mini-carte Leaflet pour un post (si GPS)
-  eleventyConfig.addShortcode("minimap", (gps, postTitle) => {
-    if (!gps) return "";
-    const id = `map-${Math.random().toString(36).slice(2, 9)}`;
-    return `<div class="mini-map" id="${id}"
-      data-lat="${gps.lat}" data-lon="${gps.lon}"
-      data-title="${(postTitle || "").replace(/"/g, "&quot;")}">
-    </div>`;
   });
 
   // ── Options Eleventy ──────────────────────────────────────────────────────
