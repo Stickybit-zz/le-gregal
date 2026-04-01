@@ -1,0 +1,18 @@
+---
+layout: base.njk
+title: Album photos
+bodyClass: page-album
+---
+
+<div class="page-header">
+  <h1>Album photos</h1>
+  <p>{{ photos.length }} photos du voyage</p>
+</div>
+
+<div class="photo-grid">
+  {% for photo in photos %}
+  <a href="{{ ('/photos/' + photo) | url }}" class="photo-thumb" target="_blank" rel="noopener">
+    <img src="{{ ('/photos/' + photo) | url }}" alt="{{ photo }}" loading="lazy">
+  </a>
+  {% endfor %}
+</div>
