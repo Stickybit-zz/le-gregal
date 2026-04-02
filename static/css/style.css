@@ -390,7 +390,7 @@ main {
   font-style: italic;
   margin: 1rem 0;
 }
-.post-content div { margin-bottom: .6rem; } /* Espacements entre blocs Blogger */
+.post-content p { margin-bottom: .9rem; }
 
 /* Navigation entre posts */
 .post-nav {
