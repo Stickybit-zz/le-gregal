@@ -371,10 +371,16 @@ main {
 .post-content h2 { font-size: 1.35rem; margin: 1.75rem 0 .75rem; color: var(--sea-dark); }
 .post-content h3 { font-size: 1.15rem; margin: 1.5rem 0 .5rem; }
 .post-content img {
-  margin: 1rem auto;
-  max-height: 500px;
-  object-fit: contain;
-  box-shadow: var(--shadow);
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 12px rgba(0,0,0,.15);
+}
+.post-content a:has(img) {
+  display: block;
+  text-align: center;
 }
 .post-content a { color: var(--sea); }
 .post-content blockquote {
