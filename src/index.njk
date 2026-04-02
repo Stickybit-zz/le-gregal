@@ -23,22 +23,54 @@ bodyClass: page-home
 
 <div id="global-map" class="global-map"></div>
 
-<section class="latest-posts">
-  <h2>Derniers billets</h2>
+<section class="voyage-stages">
+  <h2>Le voyage en 5 étapes</h2>
+  <div class="stages-grid">
+    <a href="{{ '/etapes/disponibilite-et-annee-sabbatique/' | url }}" class="stage-card">
+      <span class="stage-icon">🛠</span>
+      <h3>Préparatifs</h3>
+      <p>Quitter son travail, acheter un voilier d'occasion, apprendre à naviguer</p>
+    </a>
+    <a href="{{ '/etapes/mediterranee-les-premiers-pas-de-gregal/' | url }}" class="stage-card">
+      <span class="stage-icon">🌊</span>
+      <h3>Méditerranée</h3>
+      <p>Sète, Corse, Sardaigne, Baléares, Maroc, Canaries, Cap Vert</p>
+    </a>
+    <a href="{{ '/etapes/transat-aller-cap-vert-la-barbade/' | url }}" class="stage-card">
+      <span class="stage-icon">⛵</span>
+      <h3>Transat aller</h3>
+      <p>18 jours en mer, 2 600 milles, Cap Vert → Barbade</p>
+    </a>
+    <a href="{{ '/etapes/escales-et-terres-nouvelles/' | url }}" class="stage-card">
+      <span class="stage-icon">🌴</span>
+      <h3>Caraïbes</h3>
+      <p>Barbade, Martinique, Guadeloupe, Grenade, Grenadines, Antigua…</p>
+    </a>
+    <a href="{{ '/etapes/transat-retour-st-martin-bermudes-acores-gibraltar/' | url }}" class="stage-card">
+      <span class="stage-icon">🔄</span>
+      <h3>Retour</h3>
+      <p>Saint-Martin, Bermudes, Açores, Gibraltar</p>
+    </a>
+  </div>
+</section>
+
+<section class="best-of">
+  <h2>Les billets incontournables</h2>
+  <p class="section-intro">Une sélection de 33 billets pour découvrir le voyage — utiles aussi pour ceux qui préparent leur propre aventure.</p>
   <div class="posts-grid">
-    {% set allPosts = collections.posts %}
-    {% for post in allPosts | reverse | slice(0, 6) %}
+    {% for cat in categories %}
+    {% if cat.slug == 'best-of-billets-special-remembering' %}
+    {% for post in cat.posts %}
     <article class="post-card">
       <div class="post-card-meta">
         <time datetime="{{ post.published | dateISO }}">{{ post.published | dateDisplay }}</time>
-        <span class="post-card-author">{{ post.author }}</span>
       </div>
       <h3><a href="{{ ('/' + post.slug + '/') | url }}">{{ post.title }}</a></h3>
-      <p class="post-card-excerpt">{{ post.content | excerpt(160) }}</p>
-      {% if post.gps %}
-      <span class="post-card-gps" title="Position GPS">📍</span>
-      {% endif %}
+      <p class="post-card-excerpt">{{ post.content | excerpt(140) }}</p>
+      {% if post.gps %}<span class="post-card-gps" title="Position GPS">📍</span>{% endif %}
     </article>
+    {% endfor %}
+    {% endif %}
     {% endfor %}
   </div>
   <p class="all-posts-link"><a href="{{ '/chronologie/' | url }}">Tous les {{ site.post_count }} billets →</a></p>

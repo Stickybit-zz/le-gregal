@@ -232,17 +232,50 @@ main {
   font-family: var(--font-ui);
 }
 
-/* ── Grille de posts (homepage) ───────────────────────────────────────────── */
-.latest-posts {
+/* ── Sections homepage ────────────────────────────────────────────────────── */
+.voyage-stages, .best-of {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 2.5rem 1rem;
 }
-.latest-posts h2 {
+.voyage-stages h2, .best-of h2 {
   font-size: 1.4rem;
   color: var(--sea-dark);
-  margin-bottom: 1.25rem;
+  margin-bottom: .5rem;
 }
+.section-intro {
+  color: var(--text-light);
+  font-size: .95rem;
+  margin-bottom: 1.5rem;
+}
+.stages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.stage-card {
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1rem;
+  text-decoration: none;
+  transition: box-shadow .15s, transform .15s, border-color .15s;
+}
+.stage-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  transform: translateY(-2px);
+  border-color: var(--sea-light);
+  text-decoration: none;
+}
+.stage-icon { font-size: 1.5rem; display: block; margin-bottom: .5rem; }
+.stage-card h3 { font-size: 1rem; color: var(--sea-dark); margin-bottom: .35rem; }
+.stage-card p { font-size: .82rem; color: var(--text-light); line-height: 1.4; margin: 0; }
+.all-posts-link { margin-top: 1.5rem; text-align: center; }
+.all-posts-link a { color: var(--sea); font-family: var(--font-ui); font-size: .9rem; }
+
+/* ── Grille de posts ──────────────────────────────────────────────────────── */
 .posts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
