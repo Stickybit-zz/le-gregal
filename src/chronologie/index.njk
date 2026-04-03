@@ -25,10 +25,6 @@ bodyClass: page-chronologie
   </div>
 
   <div class="filter-row filter-row-secondary">
-    <div class="filter-group" id="filter-authors">
-      <button class="filter-btn toggle" data-author="Tom">👤 Tom</button>
-      <button class="filter-btn toggle" data-author="Aude">👤 Aude</button>
-    </div>
     <button class="filter-btn toggle" id="filter-video">🎬 Avec vidéo</button>
     <input type="search" id="search-input" placeholder="Rechercher un titre…" aria-label="Rechercher un billet">
   </div>
@@ -96,13 +92,11 @@ bodyClass: page-chronologie
 (function () {
   const searchInput = document.getElementById('search-input');
   const etapeBtns   = document.querySelectorAll('#filter-etapes .filter-btn');
-  const authorBtns  = document.querySelectorAll('#filter-authors .filter-btn');
   const videBtn     = document.getElementById('filter-video');
   const posts       = document.querySelectorAll('.timeline-post');
   const yearItems   = document.querySelectorAll('.timeline-year');
 
   let activeEtape  = '';
-  let activeAuthor = '';
   let activeVideo  = false;
 
   function applyFilters() {
@@ -112,7 +106,6 @@ bodyClass: page-chronologie
       const ok =
         (!query        || post.dataset.title.includes(query)) &&
         (!activeEtape  || post.dataset.etape  === activeEtape) &&
-        (!activeAuthor || post.dataset.author === activeAuthor) &&
         (!activeVideo  || post.dataset.hasVideo === 'true');
       post.style.display = ok ? '' : 'none';
     });
@@ -130,21 +123,6 @@ bodyClass: page-chronologie
       etapeBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       activeEtape = btn.dataset.etape;
-      applyFilters();
-    });
-  });
-
-  // Author buttons (toggle: click active → deselect)
-  authorBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const isActive = btn.classList.contains('active');
-      authorBtns.forEach(b => b.classList.remove('active'));
-      if (!isActive) {
-        btn.classList.add('active');
-        activeAuthor = btn.dataset.author;
-      } else {
-        activeAuthor = '';
-      }
       applyFilters();
     });
   });
