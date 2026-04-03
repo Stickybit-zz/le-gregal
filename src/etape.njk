@@ -15,6 +15,9 @@ eleventyComputed:
   <a href="{{ '/etapes/' | url }}" class="back-link">← Toutes les étapes</a>
   <h1>{{ category.name }}</h1>
   <p>{{ category.post_count }} billet{% if category.post_count > 1 %}s{% endif %}</p>
+  {% if category.posts.length %}
+  <p class="page-header-dates">{{ category.posts[0].published | dateDisplay }} → {{ category.posts[category.posts.length - 1].published | dateDisplay }}</p>
+  {% endif %}
 </div>
 
 {% if category.gps_center %}
@@ -28,6 +31,9 @@ eleventyComputed:
 {% for post in category.posts %}
 <li class="etape-post-item">
   <article class="timeline-card">
+    {% if postThumbnails[post.slug] %}
+    <img class="tl-thumb" src="{{ postThumbnails[post.slug] | url }}" alt="" loading="lazy">
+    {% endif %}
     <time datetime="{{ post.published | dateISO }}" class="post-date">{{ post.published | dateDisplay }}</time>
     <div class="timeline-card-body">
       <h3><a href="{{ ('/' + post.slug + '/') | url }}">{{ post.title }}</a></h3>

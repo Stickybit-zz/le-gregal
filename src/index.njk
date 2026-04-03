@@ -26,40 +26,48 @@ bodyClass: page-home
 <section class="voyage-stages">
   <h2>Le voyage en 7 étapes</h2>
   <div class="stages-grid">
+    {% for cat in categories %}{% if cat.slug == 'disponibilite-et-annee-sabbatique' %}{% set c0 = cat %}{% endif %}{% if cat.slug == 'mediterranee-les-premiers-pas-de-gregal' %}{% set c1 = cat %}{% endif %}{% if cat.slug == 'atlantique' %}{% set c2 = cat %}{% endif %}{% if cat.slug == 'transat-aller-cap-vert-la-barbade' %}{% set c3 = cat %}{% endif %}{% if cat.slug == 'escales-et-terres-nouvelles' %}{% set c4 = cat %}{% endif %}{% if cat.slug == 'transat-retour-st-martin-bermudes-acores-gibraltar' %}{% set c5 = cat %}{% endif %}{% if cat.slug == 'retour-a-sete' %}{% set c6 = cat %}{% endif %}{% endfor %}
     <a href="{{ '/etapes/disponibilite-et-annee-sabbatique/' | url }}" class="stage-card">
       <span class="stage-icon">🛠</span>
       <h3>Préparatifs</h3>
       <p>Quitter son travail, acheter un voilier d'occasion, apprendre à naviguer</p>
+      <span class="stage-count">{{ c0.post_count }} billets</span>
     </a>
     <a href="{{ '/etapes/mediterranee-les-premiers-pas-de-gregal/' | url }}" class="stage-card">
       <span class="stage-icon">🌊</span>
       <h3>Méditerranée</h3>
       <p>Sète, Corse, Sardaigne, Baléares, Espagne</p>
+      <span class="stage-count">{{ c1.post_count }} billets</span>
     </a>
     <a href="{{ '/etapes/atlantique/' | url }}" class="stage-card">
       <span class="stage-icon">🌍</span>
       <h3>Atlantique</h3>
       <p>Gibraltar, Maroc, Canaries, Cap Vert</p>
+      <span class="stage-count">{{ c2.post_count }} billets</span>
     </a>
     <a href="{{ '/etapes/transat-aller-cap-vert-la-barbade/' | url }}" class="stage-card">
       <span class="stage-icon">⛵</span>
       <h3>Transat aller</h3>
       <p>18 jours en mer, 2 600 milles, Cap Vert → Barbade</p>
+      <span class="stage-count">{{ c3.post_count }} billets</span>
     </a>
     <a href="{{ '/etapes/escales-et-terres-nouvelles/' | url }}" class="stage-card">
       <span class="stage-icon">🌴</span>
       <h3>Caraïbes</h3>
       <p>Barbade, Martinique, Guadeloupe, Grenade, Grenadines, Antigua…</p>
+      <span class="stage-count">{{ c4.post_count }} billets</span>
     </a>
     <a href="{{ '/etapes/transat-retour-st-martin-bermudes-acores-gibraltar/' | url }}" class="stage-card">
       <span class="stage-icon">🔄</span>
       <h3>Transat retour</h3>
       <p>Saint-Martin, Bermudes, Açores, Gibraltar</p>
+      <span class="stage-count">{{ c5.post_count }} billets</span>
     </a>
     <a href="{{ '/etapes/retour-a-sete/' | url }}" class="stage-card">
       <span class="stage-icon">🏠</span>
       <h3>Retour à Sète</h3>
       <p>Côte espagnole, Gibraltar, Méditerranée</p>
+      <span class="stage-count">{{ c6.post_count }} billets</span>
     </a>
   </div>
 </section>
@@ -72,12 +80,17 @@ bodyClass: page-home
     {% if cat.slug == 'best-of-billets-special-remembering' %}
     {% for post in cat.posts %}
     <article class="post-card">
-      <div class="post-card-meta">
-        <time datetime="{{ post.published | dateISO }}">{{ post.published | dateDisplay }}</time>
+      {% if postThumbnails[post.slug] %}
+      <img class="post-card-thumb" src="{{ postThumbnails[post.slug] | url }}" alt="" loading="lazy">
+      {% endif %}
+      <div class="post-card-body">
+        <div class="post-card-meta">
+          <time datetime="{{ post.published | dateISO }}">{{ post.published | dateDisplay }}</time>
+        </div>
+        <h3><a href="{{ ('/' + post.slug + '/') | url }}">{{ post.title }}</a></h3>
+        <p class="post-card-excerpt">{{ post.content | excerpt(140) }}</p>
+        {% if post.gps %}<span class="post-card-gps" title="Position GPS">📍</span>{% endif %}
       </div>
-      <h3><a href="{{ ('/' + post.slug + '/') | url }}">{{ post.title }}</a></h3>
-      <p class="post-card-excerpt">{{ post.content | excerpt(140) }}</p>
-      {% if post.gps %}<span class="post-card-gps" title="Position GPS">📍</span>{% endif %}
     </article>
     {% endfor %}
     {% endif %}

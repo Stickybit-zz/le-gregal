@@ -15,8 +15,9 @@
   --white:      #fff;
   --border:     #ddd;
 
-  --font-body:  'Georgia', 'Times New Roman', serif;
-  --font-ui:    system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body:    'Georgia', 'Times New Roman', serif;
+  --font-heading: 'Lora', 'Georgia', serif;
+  --font-ui:      system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --radius:     4px;
   --shadow:     0 1px 4px rgba(0,0,0,.12);
@@ -130,6 +131,7 @@ main {
 }
 .page-header h1 {
   font-size: 2rem;
+  font-family: var(--font-heading);
   color: var(--sea-dark);
   margin-bottom: .25rem;
 }
@@ -155,6 +157,7 @@ main {
 }
 .hero h1 {
   font-size: 2.5rem;
+  font-family: var(--font-heading);
   margin-bottom: .5rem;
   letter-spacing: .02em;
 }
@@ -240,6 +243,7 @@ main {
 }
 .voyage-stages h2, .best-of h2 {
   font-size: 1.4rem;
+  font-family: var(--font-heading);
   color: var(--sea-dark);
   margin-bottom: .5rem;
 }
@@ -270,8 +274,16 @@ main {
   text-decoration: none;
 }
 .stage-icon { font-size: 1.5rem; display: block; margin-bottom: .5rem; }
-.stage-card h3 { font-size: 1rem; color: var(--sea-dark); margin-bottom: .35rem; }
+.stage-card h3 { font-size: 1rem; font-family: var(--font-heading); color: var(--sea-dark); margin-bottom: .35rem; }
 .stage-card p { font-size: .82rem; color: var(--text-light); line-height: 1.4; margin: 0; }
+.stage-count {
+  display: inline-block;
+  margin-top: .5rem;
+  font-family: var(--font-ui);
+  font-size: .75rem;
+  color: var(--sea);
+  opacity: .8;
+}
 .all-posts-link { margin-top: 1.5rem; text-align: center; }
 .all-posts-link a { color: var(--sea); font-family: var(--font-ui); font-size: .9rem; }
 
@@ -284,11 +296,24 @@ main {
 .post-card {
   background: var(--white);
   border-radius: var(--radius);
-  padding: 1.25rem;
+  overflow: hidden;
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
   transition: box-shadow .2s, transform .2s;
   position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.post-card-thumb {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 0;
+  display: block;
+}
+.post-card-body {
+  padding: 1.25rem;
+  flex: 1;
 }
 .post-card:hover {
   box-shadow: 0 4px 12px rgba(0,0,0,.15);
@@ -301,7 +326,7 @@ main {
   margin-bottom: .5rem;
   display: flex; gap: .75rem;
 }
-.post-card h3 { font-size: 1rem; margin-bottom: .5rem; line-height: 1.4; }
+.post-card h3 { font-size: 1rem; font-family: var(--font-heading); margin-bottom: .5rem; line-height: 1.4; }
 .post-card h3 a { color: var(--text); }
 .post-card h3 a:hover { color: var(--sea); }
 .post-card-excerpt { font-size: .85rem; color: var(--text-light); line-height: 1.5; }
@@ -391,6 +416,7 @@ main {
   margin: 1rem 0;
 }
 .post-content p { margin-bottom: .9rem; }
+.post-content [align="justify"] { text-align: left; }
 
 /* Navigation entre posts */
 .post-nav {
@@ -558,6 +584,14 @@ main {
 .tl-gps { font-size: .75rem; }
 .tl-comments { font-family: var(--font-ui); font-size: .75rem; color: var(--text-light); }
 .tl-excerpt { font-size: .85rem; color: var(--text-light); line-height: 1.5; }
+.tl-thumb {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  flex-shrink: 0;
+  align-self: center;
+}
 
 @media (max-width: 500px) {
   .timeline-card { flex-direction: column; gap: .25rem; }
@@ -587,12 +621,18 @@ main {
 .etape-card-link {
   display: block; padding: 1rem 1.25rem; color: var(--text); text-decoration: none;
 }
-.etape-name { font-size: .95rem; margin-bottom: .4rem; color: var(--sea-dark); }
+.etape-name { font-size: .95rem; font-family: var(--font-heading); margin-bottom: .4rem; color: var(--sea-dark); }
 .etape-meta {
   font-family: var(--font-ui); font-size: .78rem; color: var(--text-light);
   display: flex; gap: .75rem;
 }
 .etape-posts-list { list-style: none; max-width: var(--max-width); margin: 0 auto; padding: 0 1rem; display: flex; flex-direction: column; gap: .5rem; }
+.page-header-dates {
+  font-family: var(--font-ui);
+  font-size: .85rem;
+  color: var(--text-light);
+  margin-top: .2rem;
+}
 
 /* ── Page À propos ────────────────────────────────────────────────────────── */
 .about-content { max-width: 680px; }
