@@ -1565,7 +1565,7 @@
       "Vidéos"
     ],
     "gps": null,
-    "content": "<div style=\"text-align: center;\"><p class=\"video-unavailable\">⚠️ Vidéo non disponible</p></div>",
+    "content": "<div style=\"text-align: center;\"><div class=\"video-container\"><video controls preload=\"metadata\" src=\"/le-gregal/videos/16620544e3a1e091.mp4\">Votre navigateur ne supporte pas la lecture vidéo.</video></div></div>",
     "comment_count": 2,
     "video_ids": [
       "16620544e3a1e091"
