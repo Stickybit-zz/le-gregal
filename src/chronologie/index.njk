@@ -10,14 +10,27 @@ bodyClass: page-chronologie
 </div>
 
 <div class="chrono-filters">
-  <label for="search-input">Rechercher :</label>
-  <input type="search" id="search-input" placeholder="Titre, lieu…" aria-label="Rechercher un billet">
-  <div class="filter-categories">
-    <button class="filter-btn active" data-cat="">Tout</button>
-    <button class="filter-btn" data-cat="Traversées">Traversées</button>
-    <button class="filter-btn" data-cat="Escales et terres nouvelles">Escales</button>
-    <button class="filter-btn" data-cat="Vidéos">Vidéos</button>
-    <button class="filter-btn" data-cat="La dure vie du marin">Vie du bord</button>
+  <div class="filter-row">
+    <label>Étape :</label>
+    <div class="filter-group" id="filter-etapes">
+      <button class="filter-btn active" data-etape="">Tout</button>
+      <button class="filter-btn" data-etape="disponibilite-et-annee-sabbatique">Préparatifs</button>
+      <button class="filter-btn" data-etape="mediterranee-les-premiers-pas-de-gregal">Méditerranée</button>
+      <button class="filter-btn" data-etape="atlantique">Atlantique</button>
+      <button class="filter-btn" data-etape="transat-aller-cap-vert-la-barbade">Transat aller</button>
+      <button class="filter-btn" data-etape="escales-et-terres-nouvelles">Caraïbes</button>
+      <button class="filter-btn" data-etape="transat-retour-st-martin-bermudes-acores-gibraltar">Transat retour</button>
+      <button class="filter-btn" data-etape="retour-a-sete">Retour à Sète</button>
+    </div>
+  </div>
+
+  <div class="filter-row filter-row-secondary">
+    <div class="filter-group" id="filter-authors">
+      <button class="filter-btn toggle" data-author="Tom">👤 Tom</button>
+      <button class="filter-btn toggle" data-author="Aude">👤 Aude</button>
+    </div>
+    <button class="filter-btn toggle" id="filter-video">🎬 Avec vidéo</button>
+    <input type="search" id="search-input" placeholder="Rechercher un titre…" aria-label="Rechercher un billet">
   </div>
 </div>
 
@@ -47,7 +60,9 @@ bodyClass: page-chronologie
 
   <li class="timeline-post"
       data-title="{{ post.title | lower }}"
-      data-cats="{{ post.categories | join(',') | lower }}">
+      data-etape="{{ postEtapes[post.slug] }}"
+      data-author="{{ post.author }}"
+      data-has-video="{{ 'true' if '<video' in post.content else 'false' }}">
     <article class="timeline-card">
       <time datetime="{{ post.published | dateISO }}" class="post-date">
         {{ post.published | dateDisplay }}
@@ -78,24 +93,30 @@ bodyClass: page-chronologie
 </ol>
 
 <script>
-(function() {
+(function () {
   const searchInput = document.getElementById('search-input');
-  const filterBtns  = document.querySelectorAll('.filter-btn');
+  const etapeBtns   = document.querySelectorAll('#filter-etapes .filter-btn');
+  const authorBtns  = document.querySelectorAll('#filter-authors .filter-btn');
+  const videBtn     = document.getElementById('filter-video');
   const posts       = document.querySelectorAll('.timeline-post');
   const yearItems   = document.querySelectorAll('.timeline-year');
 
-  let activeFilter = '';
+  let activeEtape  = '';
+  let activeAuthor = '';
+  let activeVideo  = false;
 
   function applyFilters() {
     const query = searchInput.value.toLowerCase().trim();
 
     posts.forEach(post => {
-      const titleMatch = !query || post.dataset.title.includes(query);
-      const catMatch   = !activeFilter || post.dataset.cats.includes(activeFilter.toLowerCase());
-      post.style.display = (titleMatch && catMatch) ? '' : 'none';
+      const ok =
+        (!query        || post.dataset.title.includes(query)) &&
+        (!activeEtape  || post.dataset.etape  === activeEtape) &&
+        (!activeAuthor || post.dataset.author === activeAuthor) &&
+        (!activeVideo  || post.dataset.hasVideo === 'true');
+      post.style.display = ok ? '' : 'none';
     });
 
-    // Masque les années/mois vides
     yearItems.forEach(yearEl => {
       const visible = [...yearEl.querySelectorAll('.timeline-post')]
         .some(p => p.style.display !== 'none');
@@ -103,15 +124,38 @@ bodyClass: page-chronologie
     });
   }
 
-  searchInput.addEventListener('input', applyFilters);
-
-  filterBtns.forEach(btn => {
+  // Étape buttons (radio)
+  etapeBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
+      etapeBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      activeFilter = btn.dataset.cat;
+      activeEtape = btn.dataset.etape;
       applyFilters();
     });
   });
+
+  // Author buttons (toggle: click active → deselect)
+  authorBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isActive = btn.classList.contains('active');
+      authorBtns.forEach(b => b.classList.remove('active'));
+      if (!isActive) {
+        btn.classList.add('active');
+        activeAuthor = btn.dataset.author;
+      } else {
+        activeAuthor = '';
+      }
+      applyFilters();
+    });
+  });
+
+  // Video toggle
+  videBtn.addEventListener('click', () => {
+    activeVideo = !activeVideo;
+    videBtn.classList.toggle('active', activeVideo);
+    applyFilters();
+  });
+
+  searchInput.addEventListener('input', applyFilters);
 })();
 </script>
