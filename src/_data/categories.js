@@ -39,7 +39,8 @@ const MACRO_STAGES = {
   },
   'escales-et-terres-nouvelles': {
     subCats: [
-      'escales-et-terres-nouvelles',
+      // 'escales-et-terres-nouvelles' exclu : label utilisé sur tout le voyage
+      // 'saint-martin' exclu : date range suffit + 1 post mislabellisé (santa-maria)
       'la-barbade',
       'grenade',
       'les-grenadines-carriacou-union-tobago-cays-canouan-bequia',
@@ -47,9 +48,8 @@ const MACRO_STAGES = {
       'guadeloupe-marie-galante-les-saintes',
       'la-dominique',
       'antigua',
-      'saint-martin',
     ],
-    dateMin: '2008-12-26',
+    dateMin: '2008-12-27',  // la-traverse-vue-par-tom (26 déc) reste dans Transat aller
     dateMax: '2009-05-13',
   },
   'transat-retour-st-martin-bermudes-acores-gibraltar': {
@@ -68,7 +68,9 @@ const ATLANTIQUE = {
   slug:      'atlantique',
   name:      'Atlantique',
   gps_center: null,
-  subCats:   ['maroc-essaouira', 'canaries', 'cap-vert', 'gibraltar-avant-apres'],
+  subCats:   ['maroc-essaouira', 'canaries', 'cap-vert'],
+  // 'gibraltar-avant-apres' exclu : label présent aussi en juillet 2009 (retour)
+  //  → la date range [2008-10-04 → 2008-12-05] suffit
   dateMin:   '2008-10-04',   // Gibraltar le 04/10, Maroc, Canaries, Cap Vert
   dateMax:   '2008-12-05',
 };
