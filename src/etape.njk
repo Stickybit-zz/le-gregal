@@ -32,7 +32,7 @@ eleventyComputed:
 <li class="etape-post-item">
   <article class="timeline-card">
     {% if postThumbnails[post.slug] %}
-    <img class="tl-thumb" src="{{ postThumbnails[post.slug] | url }}" alt="" loading="lazy">
+    <img class="tl-thumb" src="{{ postThumbnails[post.slug] }}" alt="" loading="lazy">
     {% endif %}
     <time datetime="{{ post.published | dateISO }}" class="post-date">{{ post.published | dateDisplay }}</time>
     <div class="timeline-card-body">

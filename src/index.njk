@@ -81,7 +81,7 @@ bodyClass: page-home
     {% for post in cat.posts %}
     <article class="post-card">
       {% if postThumbnails[post.slug] %}
-      <img class="post-card-thumb" src="{{ postThumbnails[post.slug] | url }}" alt="" loading="lazy">
+      <img class="post-card-thumb" src="{{ postThumbnails[post.slug] }}" alt="" loading="lazy">
       {% endif %}
       <div class="post-card-body">
         <div class="post-card-meta">
