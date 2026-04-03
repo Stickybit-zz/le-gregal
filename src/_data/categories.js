@@ -14,7 +14,9 @@ const MACRO_STAGES = {
       'disponibilite-et-annee-sabbatique',
       'acheter-un-voilier-d-occasion',
       'glenans',
-      'travaux',
+      // 'travaux' exclu des sous-cats : ses posts de jan 2009 (Grenade)
+      // seraient remontés ici. La date range < 2008-08-02 suffit pour
+      // capturer tous les vrais posts de préparation.
     ],
     dateMin: null,
     dateMax: '2008-08-02',
@@ -27,7 +29,7 @@ const MACRO_STAGES = {
       'baleares',
     ],
     dateMin: '2008-08-02',
-    dateMax: '2008-10-03',   // Gibraltar crossing = entrée dans l'Atlantique
+    dateMax: '2008-10-04',   // inclut le 03/10 (Michka, Ponente) ; Gibraltar le 04/10
   },
   // Atlantique is a virtual category (not in categoriesRaw.json), built below
   'transat-aller-cap-vert-la-barbade': {
@@ -57,18 +59,28 @@ const MACRO_STAGES = {
       'acores',
     ],
     dateMin: '2009-05-13',
-    dateMax: null,
+    dateMax: '2009-07-07',   // à partir du 07/07 → Retour à Sète
   },
 };
 
-// Virtual Atlantique stage (Maroc + Canaries + Cap Vert + Gibraltar crossing)
+// Virtual Atlantique stage (Gibraltar crossing + Maroc + Canaries + Cap Vert)
 const ATLANTIQUE = {
   slug:      'atlantique',
   name:      'Atlantique',
   gps_center: null,
   subCats:   ['maroc-essaouira', 'canaries', 'cap-vert', 'gibraltar-avant-apres'],
-  dateMin:   '2008-10-03',
+  dateMin:   '2008-10-04',   // Gibraltar le 04/10, Maroc, Canaries, Cap Vert
   dateMax:   '2008-12-05',
+};
+
+// Virtual Retour à Sète stage (arrivée via côte espagnole et Méditerranée)
+const RETOUR_SETE = {
+  slug:      'retour-a-sete',
+  name:      'Retour à Sète',
+  gps_center: null,
+  subCats:   [],
+  dateMin:   '2009-07-07',
+  dateMax:   null,
 };
 
 const catBySlug = Object.fromEntries(rawCategories.map(c => [c.slug, c]));
@@ -123,8 +135,17 @@ const atlantiqueCat = {
   post_count: atlantiquePosts.length,
   posts:      atlantiquePosts,
 };
-
 const medIdx = enriched.findIndex(c => c.slug === 'mediterranee-les-premiers-pas-de-gregal');
 enriched.splice(medIdx + 1, 0, atlantiqueCat);
+
+// Append virtual Retour à Sète category at the end
+const retourSetePosts = buildPosts(RETOUR_SETE);
+enriched.push({
+  slug:       RETOUR_SETE.slug,
+  name:       RETOUR_SETE.name,
+  gps_center: RETOUR_SETE.gps_center,
+  post_count: retourSetePosts.length,
+  posts:      retourSetePosts,
+});
 
 export default enriched;
