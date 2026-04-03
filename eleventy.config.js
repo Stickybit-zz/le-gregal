@@ -74,12 +74,6 @@ export default function (eleventyConfig) {
     );
   });
 
-  // Collection de catégories depuis categories.json
-  eleventyConfig.addCollection("categories", () => {
-    return JSON.parse(
-      readFileSync(join(__dirname, "src/_data/categories.json"), "utf-8")
-    );
-  });
 
   // ── Options Eleventy ──────────────────────────────────────────────────────
   return {
