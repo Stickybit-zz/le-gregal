@@ -60,6 +60,11 @@ bodyClass: page-chronologie
       data-author="{{ post.author }}"
       data-has-video="{{ 'true' if '<video' in post.content else 'false' }}">
     <article class="timeline-card">
+      <div class="tl-thumb-col">
+        {% if postThumbnails[post.slug] %}
+        <img class="tl-thumb" src="{{ postThumbnails[post.slug] }}" alt="" loading="lazy">
+        {% endif %}
+      </div>
       <time datetime="{{ post.published | dateISO }}" class="post-date">
         {{ post.published | dateDisplay }}
       </time>

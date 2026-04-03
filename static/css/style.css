@@ -584,13 +584,17 @@ main {
 .tl-gps { font-size: .75rem; }
 .tl-comments { font-family: var(--font-ui); font-size: .75rem; color: var(--text-light); }
 .tl-excerpt { font-size: .85rem; color: var(--text-light); line-height: 1.5; }
+.tl-thumb-col {
+  width: 80px;
+  flex-shrink: 0;
+  align-self: center;
+}
 .tl-thumb {
   width: 80px;
   height: 60px;
   object-fit: cover;
   border-radius: var(--radius);
-  flex-shrink: 0;
-  align-self: center;
+  display: block;
 }
 
 @media (max-width: 500px) {

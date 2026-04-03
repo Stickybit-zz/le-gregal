@@ -1,7 +1,6 @@
 ---
 layout: base.njk
 title: Étapes du voyage
-leaflet: true
 bodyClass: page-etapes
 ---
 
@@ -9,8 +8,6 @@ bodyClass: page-etapes
   <h1>Les étapes du voyage</h1>
   <p>{{ categories.length }} régions · {{ site.post_count }} billets</p>
 </div>
-
-<div id="etapes-map" class="global-map"></div>
 
 <div class="etapes-grid">
 {% for cat in categories %}
@@ -24,26 +21,3 @@ bodyClass: page-etapes
 </article>
 {% endfor %}
 </div>
-
-<script>
-(function() {
-  const map = L.map('etapes-map', { scrollWheelZoom: false }).setView([25, -30], 3);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    maxZoom: 18
-  }).addTo(map);
-
-  map.on('click', () => map.scrollWheelZoom.enable());
-
-  {% set trackUrl = '/data/track.json' | url %}
-  fetch('{{ trackUrl }}')
-    .then(r => r.json())
-    .then(track => {
-      if (!track.length) return;
-      L.polyline(track.map(p => [p.lat, p.lon]), {
-        color: '#2c7bb6', weight: 3, opacity: 0.8
-      }).addTo(map);
-      map.fitBounds(L.latLngBounds(track.map(p => [p.lat, p.lon])).pad(0.1));
-    });
-})();
-</script>

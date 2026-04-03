@@ -5,7 +5,6 @@ pagination:
   alias: category
 permalink: "/etapes/{{ category.slug }}/index.html"
 layout: base.njk
-leaflet: true
 bodyClass: page-etape
 eleventyComputed:
   title: "{{ category.name }}"
@@ -20,20 +19,15 @@ eleventyComputed:
   {% endif %}
 </div>
 
-{% if category.gps_center %}
-<div id="etape-map" class="etape-map"
-  data-lat="{{ category.gps_center[0] }}"
-  data-lon="{{ category.gps_center[1] }}">
-</div>
-{% endif %}
-
 <ol class="etape-posts-list">
 {% for post in category.posts %}
 <li class="etape-post-item">
   <article class="timeline-card">
-    {% if postThumbnails[post.slug] %}
-    <img class="tl-thumb" src="{{ postThumbnails[post.slug] }}" alt="" loading="lazy">
-    {% endif %}
+    <div class="tl-thumb-col">
+      {% if postThumbnails[post.slug] %}
+      <img class="tl-thumb" src="{{ postThumbnails[post.slug] }}" alt="" loading="lazy">
+      {% endif %}
+    </div>
     <time datetime="{{ post.published | dateISO }}" class="post-date">{{ post.published | dateDisplay }}</time>
     <div class="timeline-card-body">
       <h3><a href="{{ ('/' + post.slug + '/') | url }}">{{ post.title }}</a></h3>
@@ -47,27 +41,3 @@ eleventyComputed:
 {% endfor %}
 </ol>
 
-{% set trackUrl = '/data/track.json' | url %}
-<script>
-(function() {
-  const mapEl = document.getElementById('etape-map');
-  if (!mapEl) return;
-  const lat = parseFloat(mapEl.dataset.lat);
-  const lon = parseFloat(mapEl.dataset.lon);
-  if (isNaN(lat) || isNaN(lon)) return;
-
-  const map = L.map('etape-map', { scrollWheelZoom: false }).setView([lat, lon], 6);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    maxZoom: 18
-  }).addTo(map);
-
-  fetch('{{ trackUrl }}')
-    .then(r => r.json())
-    .then(track => {
-      L.polyline(track.map(p => [p.lat, p.lon]), {
-        color: '#2c7bb6', weight: 2, opacity: 0.3
-      }).addTo(map);
-    });
-})();
-</script>
