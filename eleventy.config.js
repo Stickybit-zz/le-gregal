@@ -16,6 +16,11 @@ export default function (eleventyConfig) {
 
   // ── Filters ───────────────────────────────────────────────────────────────
 
+  // Lookup category by slug
+  eleventyConfig.addFilter("catBySlug", (categories, slug) =>
+    (categories || []).find(c => c.slug === slug) || {}
+  );
+
   // Format date lisible
   eleventyConfig.addFilter("dateDisplay", (dateStr) => {
     if (!dateStr) return "";
