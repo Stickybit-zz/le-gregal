@@ -8,6 +8,7 @@ const __dirname = dirname(__filename);
 export default function (eleventyConfig) {
 
   // ── Passthrough copies ────────────────────────────────────────────────────
+  eleventyConfig.addPassthroughCopy({ "static/CNAME":  "CNAME"  });
   eleventyConfig.addPassthroughCopy({ "static/css":    "css"    });
   eleventyConfig.addPassthroughCopy({ "static/js":     "js"     });
   eleventyConfig.addPassthroughCopy({ "static/photos": "photos" });
@@ -82,7 +83,7 @@ export default function (eleventyConfig) {
 
   // ── Options Eleventy ──────────────────────────────────────────────────────
   return {
-    pathPrefix: "/le-gregal/",
+    pathPrefix: "/",
     dir: {
       input:    "src",
       output:   "_site",
