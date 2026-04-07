@@ -2,6 +2,10 @@
 layout: base.njk
 title: Album photos
 bodyClass: page-album
+pagination:
+  data: photos
+  size: 60
+  alias: pagePhotos
 ---
 
 <div class="page-header">
@@ -9,10 +13,26 @@ bodyClass: page-album
   <p>{{ photos.length }} photos du voyage</p>
 </div>
 
+{% if pagination.pages.length > 1 %}
+<nav class="album-pagination">
+  {% if pagination.href.previous %}<a href="{{ pagination.href.previous }}" class="album-page-link">&larr; Précédent</a>{% endif %}
+  <span class="album-page-info">Page {{ pagination.pageNumber + 1 }} / {{ pagination.pages.length }}</span>
+  {% if pagination.href.next %}<a href="{{ pagination.href.next }}" class="album-page-link">Suivant &rarr;</a>{% endif %}
+</nav>
+{% endif %}
+
 <div class="photo-grid">
-  {% for photo in photos %}
+  {% for photo in pagePhotos %}
   <a href="{{ ('/photos/' + photo) | url }}" class="photo-thumb" target="_blank" rel="noopener">
-    <img src="{{ ('/photos/' + photo) | url }}" alt="{{ photo }}" loading="lazy">
+    <img src="{{ ('/thumbs/' + photo) | url }}" alt="{{ photo }}" loading="lazy" width="320" height="240">
   </a>
   {% endfor %}
 </div>
+
+{% if pagination.pages.length > 1 %}
+<nav class="album-pagination album-pagination--bottom">
+  {% if pagination.href.previous %}<a href="{{ pagination.href.previous }}" class="album-page-link">&larr; Précédent</a>{% endif %}
+  <span class="album-page-info">Page {{ pagination.pageNumber + 1 }} / {{ pagination.pages.length }}</span>
+  {% if pagination.href.next %}<a href="{{ pagination.href.next }}" class="album-page-link">Suivant &rarr;</a>{% endif %}
+</nav>
+{% endif %}
