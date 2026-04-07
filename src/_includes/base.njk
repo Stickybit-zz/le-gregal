@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if title %}{{ title }} — {% endif %}Le Grégal</title>
   <meta name="description" content="{% if description %}{{ description }}{% else %}Carnet de bord de Tom &amp; Aude — Méditerranée, Atlantique, Antilles, 2008-2009{% endif %}">
+  <link rel="canonical" href="{{ canonicalUrl if canonicalUrl else (site.url ~ page.url) }}">
+  <meta property="og:type" content="{{ 'article' if pageType == 'article' else 'website' }}">
+  <meta property="og:title" content="{% if title %}{{ title | escape }} — {% endif %}Le Grégal">
+  <meta property="og:description" content="{{ (description or site.description) | escape }}">
+  <meta property="og:url" content="{{ canonicalUrl if canonicalUrl else (site.url ~ page.url) }}">
+  <meta property="og:image" content="{{ site.url }}{{ ogImage if ogImage else '/photos/le-gregal.jpg' }}">
+  <meta property="og:site_name" content="Le Grégal">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if title %}{{ title | escape }} — {% endif %}Le Grégal">
+  <meta name="twitter:description" content="{{ (description or site.description) | escape }}">
+  <meta name="twitter:image" content="{{ site.url }}{{ ogImage if ogImage else '/photos/le-gregal.jpg' }}">
+  {% if pageType == 'article' %}<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":{{ title | tojson | safe }},"datePublished":{{ articleDate | tojson | safe }},"author":{"@type":"Person","name":{{ articleAuthor | tojson | safe }}},"description":{{ (description or '') | tojson | safe }},"image":{{ (site.url ~ (ogImage if ogImage else '/photos/le-gregal.jpg')) | tojson | safe }},"url":{{ (canonicalUrl if canonicalUrl else (site.url ~ page.url)) | tojson | safe }}}</script>
+  {% else %}<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Le Grégal","description":{{ site.description | tojson | safe }},"url":{{ site.url | tojson | safe }}}</script>
+  {% endif %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap">

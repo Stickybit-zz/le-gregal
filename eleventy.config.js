@@ -8,7 +8,8 @@ const __dirname = dirname(__filename);
 export default function (eleventyConfig) {
 
   // ── Passthrough copies ────────────────────────────────────────────────────
-  eleventyConfig.addPassthroughCopy({ "static/CNAME":  "CNAME"  });
+  eleventyConfig.addPassthroughCopy({ "static/CNAME":     "CNAME"     });
+  eleventyConfig.addPassthroughCopy({ "static/robots.txt": "robots.txt" });
   eleventyConfig.addPassthroughCopy({ "static/css":    "css"    });
   eleventyConfig.addPassthroughCopy({ "static/js":     "js"     });
   eleventyConfig.addPassthroughCopy({ "static/photos": "photos" });
@@ -67,6 +68,15 @@ export default function (eleventyConfig) {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "");
   });
+
+  // Date courte YYYY-MM-DD (pour sitemap lastmod)
+  eleventyConfig.addFilter("dateShort", (dateStr) => {
+    if (!dateStr) return "";
+    return String(dateStr).slice(0, 10);
+  });
+
+  // Sérialise une valeur en JSON (pour JSON-LD)
+  eleventyConfig.addFilter("tojson", (val) => JSON.stringify(val ?? ""));
 
   // Commentaires d'un post donné
   eleventyConfig.addFilter("commentsFor", (commentsMap, postId) => {

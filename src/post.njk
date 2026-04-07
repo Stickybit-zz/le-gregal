@@ -9,6 +9,12 @@ leaflet: true
 bodyClass: page-post
 eleventyComputed:
   title: "{{ post.title }}"
+  description: "{{ post.content | excerpt(160) }}"
+  ogImage: "{{ postThumbnails[post.slug] }}"
+  canonicalUrl: "{{ site.url }}/{{ post.slug }}/"
+  pageType: "article"
+  articleDate: "{{ post.published | dateShort }}"
+  articleAuthor: "{{ post.author }}"
 ---
 
 <article class="post-article">

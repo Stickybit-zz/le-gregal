@@ -8,6 +8,8 @@ layout: base.njk
 bodyClass: page-etape
 eleventyComputed:
   title: "{{ category.name }}"
+  description: "{{ category.post_count }} billets sur {{ category.name }} — voyage en voilier de Tom et Aude (2008-2009)"
+  canonicalUrl: "{{ site.url }}/etapes/{{ category.slug }}/"
 ---
 
 <div class="page-header">
