@@ -1,0 +1,80 @@
+{
+  "segments": [
+    {
+      "id": "mediterranee",
+      "label": "Méditerranée",
+      "coords": [
+        [43.40,  3.69],
+        [43.27,  5.30],
+        [43.21,  5.54],
+        [41.92,  8.73],
+        [41.58,  8.73],
+        [41.39,  9.16],
+        [41.33,  9.25],
+        [41.21,  9.41],
+        [40.57,  8.32],
+        [39.89,  4.27],
+        [39.57,  2.65],
+        [36.84, -2.46],
+        [36.14, -5.35]
+      ]
+    },
+    {
+      "id": "maroc-canaries",
+      "label": "Maroc → Canaries",
+      "coords": [
+        [36.14, -5.35],
+        [31.51, -9.77],
+        [28.10, -15.42]
+      ]
+    },
+    {
+      "id": "caraibes",
+      "label": "Caraïbes",
+      "coords": [
+        [13.10, -59.62],
+        [12.05, -61.75],
+        [12.80, -61.35],
+        [13.00, -61.23],
+        [14.61, -61.07],
+        [15.30, -61.39],
+        [15.87, -61.58],
+        [16.24, -61.53],
+        [17.00, -61.77],
+        [18.07, -63.05]
+      ]
+    },
+    {
+      "id": "retour",
+      "label": "Retour Méditerranée",
+      "coords": [
+        [36.41, -5.16],
+        [39.57,  2.65],
+        [41.39,  9.16],
+        [43.40,  3.69]
+      ]
+    }
+  ],
+  "stops": [
+    { "lat": 43.40, "lon":  3.69, "name": "Sète — départ",         "slug": null },
+    { "lat": 43.27, "lon":  5.30, "name": "Marseille / Frioul",    "slug": "mediterranee-les-premiers-pas-de-gregal" },
+    { "lat": 41.92, "lon":  8.73, "name": "Corse",                 "slug": "corse" },
+    { "lat": 41.21, "lon":  9.41, "name": "Sardaigne",             "slug": "sardaigne" },
+    { "lat": 39.57, "lon":  2.65, "name": "Baléares",              "slug": "baleares" },
+    { "lat": 36.14, "lon": -5.35, "name": "Gibraltar",             "slug": "gibraltar-avant-apres" },
+    { "lat": 31.51, "lon": -9.77, "name": "Essaouira — Maroc",     "slug": "maroc-essaouira" },
+    { "lat": 28.10, "lon": -15.42,"name": "Canaries",              "slug": "canaries" },
+    { "lat": 16.90, "lon": -25.02,"name": "Cap Vert",              "slug": "cap-vert" },
+    { "lat": 13.10, "lon": -59.62,"name": "Barbade",               "slug": "la-barbade" },
+    { "lat": 12.05, "lon": -61.75,"name": "Grenade",               "slug": "grenade" },
+    { "lat": 12.80, "lon": -61.35,"name": "Grenadines",            "slug": "les-grenadines-carriacou-union-tobago-cays-canouan-bequia" },
+    { "lat": 14.61, "lon": -61.07,"name": "Martinique",            "slug": "martinique" },
+    { "lat": 16.00, "lon": -61.50,"name": "Guadeloupe / Les Saintes","slug": "guadeloupe-marie-galante-les-saintes" },
+    { "lat": 15.30, "lon": -61.39,"name": "Dominique",             "slug": "la-dominique" },
+    { "lat": 17.00, "lon": -61.77,"name": "Antigua",               "slug": "antigua" },
+    { "lat": 18.07, "lon": -63.05,"name": "Saint-Martin",          "slug": "saint-martin" },
+    { "lat": 32.30, "lon": -64.78,"name": "Bermudes",              "slug": "bermudes" },
+    { "lat": 38.54, "lon": -28.62,"name": "Açores",                "slug": "acores" },
+    { "lat": 43.40, "lon":  3.69, "name": "Sète — arrivée",        "slug": null }
+  ]
+}

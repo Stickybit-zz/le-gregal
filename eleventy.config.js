@@ -15,6 +15,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "static/thumbs": "thumbs" });
   eleventyConfig.addPassthroughCopy({ "static/videos": "videos" });
   eleventyConfig.addPassthroughCopy({ "src/_data/*.json": "data" });
+  eleventyConfig.addPassthroughCopy({ "static/data":      "data" });
 
   // ── Filters ───────────────────────────────────────────────────────────────
 
