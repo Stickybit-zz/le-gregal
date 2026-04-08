@@ -709,3 +709,90 @@ main {
 
 /* ── Utilitaires ──────────────────────────────────────────────────────────── */
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+/* ── Itinéraire ───────────────────────────────────────────────────────────── */
+.page-subtitle { color: var(--text-light); font-style: italic; margin-top: -.5rem; }
+
+.itineraire-stats {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: var(--max-width);
+  margin: 2rem auto 0;
+  padding: 0 1rem;
+}
+.itin-stat {
+  flex: 1 1 120px;
+  background: var(--sand-dark);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  text-align: center;
+}
+.itin-stat-value { display: block; font-size: 1.8rem; font-weight: 700; color: var(--sea); font-family: var(--font-ui); }
+.itin-stat-label { display: block; font-size: .8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: .05em; margin-top: .2rem; }
+
+.itineraire-intro {
+  max-width: var(--max-width);
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.itineraire-table {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto 1rem;
+  padding: 0 1rem;
+  border-collapse: collapse;
+  font-family: var(--font-ui);
+  font-size: .9rem;
+  display: block;
+  overflow-x: auto;
+}
+.itineraire-table thead th {
+  text-align: left;
+  padding: .6rem .75rem;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-light);
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+.itineraire-table tbody td {
+  padding: .55rem .75rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.itineraire-table tbody tr:hover td { background: var(--sand-dark); }
+.itineraire-table td:nth-child(4) { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.itineraire-table a { color: var(--sea); text-decoration: none; white-space: nowrap; }
+.itineraire-table a:hover { text-decoration: underline; }
+
+.itin-leg-header td {
+  background: var(--sea);
+  color: #fff;
+  font-weight: 600;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  padding: .4rem .75rem;
+}
+.itin-depart td, .itin-arrive td { color: var(--text-light); background: var(--sand-dark); font-style: italic; }
+.itin-total td {
+  border-top: 2px solid var(--border);
+  border-bottom: none;
+  background: var(--sand-dark);
+  padding: .7rem .75rem;
+}
+.itin-flag { font-size: .85em; }
+
+.itineraire-note {
+  max-width: var(--max-width);
+  margin: .5rem auto 3rem;
+  padding: 0 1rem;
+  font-size: .85rem;
+  color: var(--text-light);
+}
