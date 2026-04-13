@@ -8,13 +8,13 @@ layout: base.njk
 leaflet: true
 bodyClass: page-post
 eleventyComputed:
-  title: "{{ post.title }}"
-  description: "{{ post.content | excerpt(160) }}"
+  title: "{{ post.title | safe }}"
+  description: "{{ post.content | excerpt(160) | safe }}"
   ogImage: "{{ postThumbnails[post.slug] }}"
   canonicalUrl: "{{ site.url }}/{{ post.slug }}/"
   pageType: "article"
   articleDate: "{{ post.published | dateShort }}"
-  articleAuthor: "{{ post.author }}"
+  articleAuthor: "{{ post.author | safe }}"
 ---
 
 <article class="post-article">
