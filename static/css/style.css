@@ -689,6 +689,89 @@ main {
   display: flex; gap: .75rem;
 }
 .etape-posts-list { list-style: none; max-width: var(--max-width); margin: 0 auto; padding: 0 1rem; display: flex; flex-direction: column; gap: .5rem; }
+
+/* ── Page Explorer ─────────────────────────────────────────────────────── */
+.explorer-section {
+  max-width: var(--max-width);
+  margin: 0 auto 2.5rem;
+  padding: 0 1rem;
+}
+.explorer-section-title {
+  font-size: 1.2rem;
+  font-family: var(--font-heading);
+  color: var(--sea-dark);
+  margin-bottom: 1.25rem;
+  padding-bottom: .5rem;
+  border-bottom: 2px solid var(--sea-light);
+}
+/* Escales par région */
+.escales-regions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem 2rem;
+}
+.region-label {
+  font-family: var(--font-heading);
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--sea);
+  margin-bottom: .6rem;
+}
+.escales-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+}
+.escales-list a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  text-decoration: none;
+  color: var(--text);
+  font-size: .9rem;
+  padding: .3rem .5rem;
+  border-radius: 4px;
+  transition: background .12s, color .12s;
+}
+.escales-list a:hover {
+  background: var(--sea-pale, #eaf4fb);
+  color: var(--sea-dark);
+}
+.escales-list a span {
+  font-size: .75rem;
+  color: var(--text-light);
+  font-family: var(--font-ui);
+  margin-left: .5rem;
+}
+/* Thèmes */
+.themes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: .75rem;
+}
+.theme-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3rem;
+  padding: .9rem .75rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: box-shadow .15s, transform .15s, border-color .15s;
+  text-align: center;
+}
+.theme-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  transform: translateY(-2px);
+  border-color: var(--sea-light);
+}
+.theme-icon { font-size: 1.4rem; }
+.theme-name { font-size: .82rem; font-family: var(--font-heading); color: var(--sea-dark); }
+.theme-count { font-size: .72rem; color: var(--sea); font-family: var(--font-ui); }
 .page-header-dates {
   font-family: var(--font-ui);
   font-size: .85rem;

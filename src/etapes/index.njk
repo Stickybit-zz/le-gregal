@@ -1,23 +1,202 @@
 ---
 layout: base.njk
-title: Étapes du voyage
-bodyClass: page-etapes
+title: Explorer le voyage
+bodyClass: page-explorer
 ---
 
 <div class="page-header">
-  <h1>Les étapes du voyage</h1>
-  <p>{{ categories.length }} régions · {{ site.post_count }} billets</p>
+  <h1>Explorer le voyage</h1>
+  <p>{{ site.post_count }} billets · 18 escales · 11 mois</p>
 </div>
 
-<div class="etapes-grid">
-{% for cat in categories %}
-<article class="etape-card">
-  <a href="{{ ('/etapes/' + cat.slug + '/') | url }}" class="etape-card-link">
-    <h2 class="etape-name">{{ cat.name }}</h2>
-    <div class="etape-meta">
-      <span class="etape-count">{{ cat.post_count }} billet{% if cat.post_count > 1 %}s{% endif %}</span>
+{# ── 1. Les 7 grandes étapes ─────────────────────────────────────────────── #}
+<section class="explorer-section">
+  <h2 class="explorer-section-title">Le voyage en 7 étapes</h2>
+  <div class="stages-grid">
+    <a href="{{ '/etapes/disponibilite-et-annee-sabbatique/' | url }}" class="stage-card">
+      <div class="stage-img"><img src="{{ '/thumbs/album/08-02-16_Bapteme_du_Gregal_24.JPG' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-card-body">
+        <h3>Préparatifs</h3>
+        <p>Quitter son travail, acheter un voilier d'occasion, apprendre à naviguer</p>
+        <span class="stage-count">{{ (categories | catBySlug("disponibilite-et-annee-sabbatique")).post_count }} billets</span>
+      </div>
+    </a>
+    <a href="{{ '/etapes/mediterranee-les-premiers-pas-de-gregal/' | url }}" class="stage-card">
+      <div class="stage-img"><img src="{{ '/thumbs/album/budelli2.jpg' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-card-body">
+        <h3>Méditerranée</h3>
+        <p>Sète, Corse, Sardaigne, Baléares, Espagne</p>
+        <span class="stage-count">{{ (categories | catBySlug("mediterranee-les-premiers-pas-de-gregal")).post_count }} billets</span>
+      </div>
+    </a>
+    <a href="{{ '/etapes/atlantique/' | url }}" class="stage-card">
+      <div class="stage-img"><img src="{{ '/thumbs/album/DSC_0002.jpg' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-card-body">
+        <h3>Atlantique</h3>
+        <p>Gibraltar, Maroc, Canaries, Cap Vert</p>
+        <span class="stage-count">{{ (categories | catBySlug("atlantique")).post_count }} billets</span>
+      </div>
+    </a>
+    <a href="{{ '/etapes/transat-aller-cap-vert-la-barbade/' | url }}" class="stage-card">
+      <div class="stage-img"><img src="{{ '/thumbs/album/DSC_0594.JPG' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-card-body">
+        <h3>Transat aller</h3>
+        <p>18 jours en mer, 2 600 milles, Cap Vert → Barbade</p>
+        <span class="stage-count">{{ (categories | catBySlug("transat-aller-cap-vert-la-barbade")).post_count }} billets</span>
+      </div>
+    </a>
+    <a href="{{ '/etapes/escales-et-terres-nouvelles/' | url }}" class="stage-card">
+      <div class="stage-img"><img src="{{ '/thumbs/album/view_baradel2.jpg' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-card-body">
+        <h3>Caraïbes</h3>
+        <p>Barbade, Martinique, Guadeloupe, Grenade, Grenadines, Antigua…</p>
+        <span class="stage-count">{{ (categories | catBySlug("escales-et-terres-nouvelles")).post_count }} billets</span>
+      </div>
+    </a>
+    <a href="{{ '/etapes/transat-retour-st-martin-bermudes-acores-gibraltar/' | url }}" class="stage-card">
+      <div class="stage-img"><img src="{{ '/thumbs/album/DSC05824.JPG' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-card-body">
+        <h3>Transat retour</h3>
+        <p>Saint-Martin, Bermudes, Açores, Gibraltar</p>
+        <span class="stage-count">{{ (categories | catBySlug("transat-retour-st-martin-bermudes-acores-gibraltar")).post_count }} billets</span>
+      </div>
+    </a>
+    <a href="{{ '/etapes/retour-a-sete/' | url }}" class="stage-card">
+      <div class="stage-img"><img src="{{ '/thumbs/album/yawl.jpg' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-card-body">
+        <h3>Retour à Sète</h3>
+        <p>Côte espagnole, Gibraltar, Méditerranée</p>
+        <span class="stage-count">{{ (categories | catBySlug("retour-a-sete")).post_count }} billets</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+{# ── 2. Toutes les escales par région ────────────────────────────────────── #}
+<section class="explorer-section">
+  <h2 class="explorer-section-title">Toutes les escales</h2>
+  <div class="escales-regions">
+
+    <div class="escales-region">
+      <h3 class="region-label">Méditerranée</h3>
+      <ul class="escales-list">
+        {% set c = categories | catBySlug("glenans") %}
+        <li><a href="{{ ('/etapes/glenans/') | url }}">Glénans <span>{{ c.post_count }}</span></a></li>
+        {% set c = categories | catBySlug("corse") %}
+        <li><a href="{{ ('/etapes/corse/') | url }}">Corse <span>{{ c.post_count }}</span></a></li>
+        {% set c = categories | catBySlug("sardaigne") %}
+        <li><a href="{{ ('/etapes/sardaigne/') | url }}">Sardaigne <span>{{ c.post_count }}</span></a></li>
+        {% set c = categories | catBySlug("baleares") %}
+        <li><a href="{{ ('/etapes/baleares/') | url }}">Baléares <span>{{ c.post_count }}</span></a></li>
+        {% set c = categories | catBySlug("gibraltar-avant-apres") %}
+        <li><a href="{{ ('/etapes/gibraltar-avant-apres/') | url }}">Gibraltar <span>{{ c.post_count }}</span></a></li>
+      </ul>
     </div>
-  </a>
-</article>
-{% endfor %}
-</div>
+
+    <div class="escales-region">
+      <h3 class="region-label">Atlantique</h3>
+      <ul class="escales-list">
+        {% set c = categories | catBySlug("maroc-essaouira") %}
+        <li><a href="{{ ('/etapes/maroc-essaouira/') | url }}">Maroc — Essaouira <span>{{ c.post_count }}</span></a></li>
+        {% set c = categories | catBySlug("canaries") %}
+        <li><a href="{{ ('/etapes/canaries/') | url }}">Canaries <span>{{ c.post_count }}</span></a></li>
+        {% set c = categories | catBySlug("cap-vert") %}
+        <li><a href="{{ ('/etapes/cap-vert/') | url }}">Cap Vert <span>{{ c.post_count }}</span></a></li>
+      </ul>
+    </div>
+
+    <div class="escales-region">
+      <h3 class="region-label">Caraïbes</h3>
+      <ul class="escales-list">
+        {% set c = categories | catBySlug("la-barbade") %}
+        <li><a href="{{ ('/etapes/la-barbade/') | url }}">Barbade <span>{{ c.post_count }}</span></a></li>
+        {% set c = categories | catBySlug("martinique") %}
+        <li><a href="{{ ('/etapes/martinique/') | url }}">Martinique <span>{{ c.post_count }}</span></a></li>
+        {% set c = categories | catBySlug("guadeloupe-marie-galante-les-saintes") %}
+        <li><a href="{{ ('/etapes/guadeloupe-marie-galante-les-saintes/') | url }}">Guadeloupe <span>{{ c.post_count }}</span></a></li>
+        {% set c = categories | catBySlug("la-dominique") %}
+        <li><a href="{{ ('/etapes/la-dominique/') | url }}">Dominique <span>{{ c.post_count }}</span></a></li>
+        {% set c = categories | catBySlug("grenade") %}
+        <li><a href="{{ ('/etapes/grenade/') | url }}">Grenade <span>{{ c.post_count }}</span></a></li>
+        {% set c = categories | catBySlug("les-grenadines-carriacou-union-tobago-cays-canouan-bequia") %}
+        <li><a href="{{ ('/etapes/les-grenadines-carriacou-union-tobago-cays-canouan-bequia/') | url }}">Grenadines <span>{{ c.post_count }}</span></a></li>
+        {% set c = categories | catBySlug("antigua") %}
+        <li><a href="{{ ('/etapes/antigua/') | url }}">Antigua <span>{{ c.post_count }}</span></a></li>
+        {% set c = categories | catBySlug("saint-martin") %}
+        <li><a href="{{ ('/etapes/saint-martin/') | url }}">Saint-Martin <span>{{ c.post_count }}</span></a></li>
+      </ul>
+    </div>
+
+    <div class="escales-region">
+      <h3 class="region-label">Retour</h3>
+      <ul class="escales-list">
+        {% set c = categories | catBySlug("bermudes") %}
+        <li><a href="{{ ('/etapes/bermudes/') | url }}">Bermudes <span>{{ c.post_count }}</span></a></li>
+        {% set c = categories | catBySlug("acores") %}
+        <li><a href="{{ ('/etapes/acores/') | url }}">Açores <span>{{ c.post_count }}</span></a></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+{# ── 3. Thèmes & collections ─────────────────────────────────────────────── #}
+<section class="explorer-section">
+  <h2 class="explorer-section-title">Thèmes & collections</h2>
+  <div class="themes-grid">
+    {% set c = categories | catBySlug("traversees") %}
+    <a href="{{ ('/etapes/traversees/') | url }}" class="theme-card">
+      <span class="theme-icon">⛵</span>
+      <span class="theme-name">Traversées</span>
+      <span class="theme-count">{{ c.post_count }}</span>
+    </a>
+    {% set c = categories | catBySlug("la-dure-vie-du-marin") %}
+    <a href="{{ ('/etapes/la-dure-vie-du-marin/') | url }}" class="theme-card">
+      <span class="theme-icon">🌊</span>
+      <span class="theme-name">La dure vie du marin</span>
+      <span class="theme-count">{{ c.post_count }}</span>
+    </a>
+    {% set c = categories | catBySlug("videos") %}
+    <a href="{{ ('/etapes/videos/') | url }}" class="theme-card">
+      <span class="theme-icon">🎬</span>
+      <span class="theme-name">Vidéos</span>
+      <span class="theme-count">{{ c.post_count }}</span>
+    </a>
+    {% set c = categories | catBySlug("best-of-billets-special-remembering") %}
+    <a href="{{ ('/etapes/best-of-billets-special-remembering/') | url }}" class="theme-card">
+      <span class="theme-icon">⭐</span>
+      <span class="theme-name">Best of</span>
+      <span class="theme-count">{{ c.post_count }}</span>
+    </a>
+    {% set c = categories | catBySlug("gregalez-vous-les-recettes") %}
+    <a href="{{ ('/etapes/gregalez-vous-les-recettes/') | url }}" class="theme-card">
+      <span class="theme-icon">🍽</span>
+      <span class="theme-name">Recettes</span>
+      <span class="theme-count">{{ c.post_count }}</span>
+    </a>
+    {% set c = categories | catBySlug("peche-quand-ca-pite-a-l-hamecon") %}
+    <a href="{{ ('/etapes/peche-quand-ca-pite-a-l-hamecon/') | url }}" class="theme-card">
+      <span class="theme-icon">🎣</span>
+      <span class="theme-name">Pêche</span>
+      <span class="theme-count">{{ c.post_count }}</span>
+    </a>
+    {% set c = categories | catBySlug("astuces-a-bord") %}
+    <a href="{{ ('/etapes/astuces-a-bord/') | url }}" class="theme-card">
+      <span class="theme-icon">🔧</span>
+      <span class="theme-name">Astuces à bord</span>
+      <span class="theme-count">{{ c.post_count }}</span>
+    </a>
+    {% set c = categories | catBySlug("travaux") %}
+    <a href="{{ ('/etapes/travaux/') | url }}" class="theme-card">
+      <span class="theme-icon">🛠</span>
+      <span class="theme-name">Travaux</span>
+      <span class="theme-count">{{ c.post_count }}</span>
+    </a>
+    {% set c = categories | catBySlug("bateaux-copains") %}
+    <a href="{{ ('/etapes/bateaux-copains/') | url }}" class="theme-card">
+      <span class="theme-icon">🚢</span>
+      <span class="theme-name">Bateaux copains</span>
+      <span class="theme-count">{{ c.post_count }}</span>
+    </a>
+  </div>
+</section>
