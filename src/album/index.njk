@@ -24,7 +24,7 @@ pagination:
 <div class="photo-grid">
   {% for photo in pagePhotos %}
   <a href="{{ ('/photos/' + photo) | url }}" class="photo-thumb" target="_blank" rel="noopener">
-    <img src="{{ ('/thumbs/' + photo) | url }}" alt="{{ photo }}" loading="lazy" width="320" height="240">
+    <img src="{{ ('/thumbs/' + photo) | url }}" alt="{{ photo }}" loading="lazy">
   </a>
   {% endfor %}
 </div>
