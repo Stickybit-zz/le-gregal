@@ -6,6 +6,12 @@ bodyClass: page-home
 ---
 
 <section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline
+    poster="{{ '/photos/hero-poster.jpg' | url }}"
+    aria-hidden="true">
+    <source src="{{ '/videos/hero.mp4' | url }}" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
   <div class="hero-text">
     <h1>Le Grégal</h1>
     <p class="hero-subtitle">Une année sabbatique en voilier — 2008 / 2009</p>
@@ -27,46 +33,60 @@ bodyClass: page-home
   <h2>Le voyage en 7 étapes</h2>
   <div class="stages-grid">
     <a href="{{ '/etapes/disponibilite-et-annee-sabbatique/' | url }}" class="stage-card">
-      <span class="stage-icon">🛠</span>
-      <h3>Préparatifs</h3>
-      <p>Quitter son travail, acheter un voilier d'occasion, apprendre à naviguer</p>
-      <span class="stage-count">{{ (categories | catBySlug("disponibilite-et-annee-sabbatique")).post_count }} billets</span>
+      <div class="stage-img"><img src="{{ '/thumbs/album/08-02-16_Bapteme_du_Gregal_24.JPG' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-card-body">
+        <h3>Préparatifs</h3>
+        <p>Quitter son travail, acheter un voilier d'occasion, apprendre à naviguer</p>
+        <span class="stage-count">{{ (categories | catBySlug("disponibilite-et-annee-sabbatique")).post_count }} billets</span>
+      </div>
     </a>
     <a href="{{ '/etapes/mediterranee-les-premiers-pas-de-gregal/' | url }}" class="stage-card">
-      <span class="stage-icon">🌊</span>
-      <h3>Méditerranée</h3>
-      <p>Sète, Corse, Sardaigne, Baléares, Espagne</p>
-      <span class="stage-count">{{ (categories | catBySlug("mediterranee-les-premiers-pas-de-gregal")).post_count }} billets</span>
+      <div class="stage-img"><img src="{{ '/thumbs/album/budelli2.jpg' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-card-body">
+        <h3>Méditerranée</h3>
+        <p>Sète, Corse, Sardaigne, Baléares, Espagne</p>
+        <span class="stage-count">{{ (categories | catBySlug("mediterranee-les-premiers-pas-de-gregal")).post_count }} billets</span>
+      </div>
     </a>
     <a href="{{ '/etapes/atlantique/' | url }}" class="stage-card">
-      <span class="stage-icon">🌍</span>
-      <h3>Atlantique</h3>
-      <p>Gibraltar, Maroc, Canaries, Cap Vert</p>
-      <span class="stage-count">{{ (categories | catBySlug("atlantique")).post_count }} billets</span>
+      <div class="stage-img"><img src="{{ '/thumbs/album/DSC_0002.jpg' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-card-body">
+        <h3>Atlantique</h3>
+        <p>Gibraltar, Maroc, Canaries, Cap Vert</p>
+        <span class="stage-count">{{ (categories | catBySlug("atlantique")).post_count }} billets</span>
+      </div>
     </a>
     <a href="{{ '/etapes/transat-aller-cap-vert-la-barbade/' | url }}" class="stage-card">
-      <span class="stage-icon">⛵</span>
-      <h3>Transat aller</h3>
-      <p>18 jours en mer, 2 600 milles, Cap Vert → Barbade</p>
-      <span class="stage-count">{{ (categories | catBySlug("transat-aller-cap-vert-la-barbade")).post_count }} billets</span>
+      <div class="stage-img"><img src="{{ '/thumbs/album/DSC_0594.JPG' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-card-body">
+        <h3>Transat aller</h3>
+        <p>18 jours en mer, 2 600 milles, Cap Vert → Barbade</p>
+        <span class="stage-count">{{ (categories | catBySlug("transat-aller-cap-vert-la-barbade")).post_count }} billets</span>
+      </div>
     </a>
     <a href="{{ '/etapes/escales-et-terres-nouvelles/' | url }}" class="stage-card">
-      <span class="stage-icon">🌴</span>
-      <h3>Caraïbes</h3>
-      <p>Barbade, Martinique, Guadeloupe, Grenade, Grenadines, Antigua…</p>
-      <span class="stage-count">{{ (categories | catBySlug("escales-et-terres-nouvelles")).post_count }} billets</span>
+      <div class="stage-img"><img src="{{ '/thumbs/album/view_baradel2.jpg' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-card-body">
+        <h3>Caraïbes</h3>
+        <p>Barbade, Martinique, Guadeloupe, Grenade, Grenadines, Antigua…</p>
+        <span class="stage-count">{{ (categories | catBySlug("escales-et-terres-nouvelles")).post_count }} billets</span>
+      </div>
     </a>
     <a href="{{ '/etapes/transat-retour-st-martin-bermudes-acores-gibraltar/' | url }}" class="stage-card">
-      <span class="stage-icon">🔄</span>
-      <h3>Transat retour</h3>
-      <p>Saint-Martin, Bermudes, Açores, Gibraltar</p>
-      <span class="stage-count">{{ (categories | catBySlug("transat-retour-st-martin-bermudes-acores-gibraltar")).post_count }} billets</span>
+      <div class="stage-img"><img src="{{ '/thumbs/album/DSC05824.JPG' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-card-body">
+        <h3>Transat retour</h3>
+        <p>Saint-Martin, Bermudes, Açores, Gibraltar</p>
+        <span class="stage-count">{{ (categories | catBySlug("transat-retour-st-martin-bermudes-acores-gibraltar")).post_count }} billets</span>
+      </div>
     </a>
     <a href="{{ '/etapes/retour-a-sete/' | url }}" class="stage-card">
-      <span class="stage-icon">🏠</span>
-      <h3>Retour à Sète</h3>
-      <p>Côte espagnole, Gibraltar, Méditerranée</p>
-      <span class="stage-count">{{ (categories | catBySlug("retour-a-sete")).post_count }} billets</span>
+      <div class="stage-img"><img src="{{ '/thumbs/album/yawl.jpg' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-card-body">
+        <h3>Retour à Sète</h3>
+        <p>Côte espagnole, Gibraltar, Méditerranée</p>
+        <span class="stage-count">{{ (categories | catBySlug("retour-a-sete")).post_count }} billets</span>
+      </div>
     </a>
   </div>
 </section>
