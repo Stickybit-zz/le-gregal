@@ -63,7 +63,7 @@ a:hover { text-decoration: underline; color: var(--sea-dark); }
   flex-shrink: 0;
 }
 .site-logo:hover { color: var(--sand); text-decoration: none; }
-.logo-anchor { font-size: 1.3rem; }
+.logo-anchor { width: 20px; height: 24px; flex-shrink: 0; }
 .site-nav {
   display: flex; gap: 1.25rem;
   margin-left: auto;
