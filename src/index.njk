@@ -33,7 +33,7 @@ bodyClass: page-home
   <h2>Le voyage en 7 étapes</h2>
   <div class="stages-grid">
     <a href="{{ '/etapes/disponibilite-et-annee-sabbatique/' | url }}" class="stage-card">
-      <div class="stage-img"><img src="{{ '/thumbs/album/08-02-16_Bapteme_du_Gregal_24.JPG' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-img"><img src="{{ '/thumbs/album/08-02-16_Bapteme_du_Gregal_24.JPG' | url }}" alt="Baptême du Grégal, 2008" loading="lazy"></div>
       <div class="stage-card-body">
         <h3>Préparatifs</h3>
         <p>Quitter son travail, acheter un voilier d'occasion, apprendre à naviguer</p>
@@ -41,7 +41,7 @@ bodyClass: page-home
       </div>
     </a>
     <a href="{{ '/etapes/mediterranee-les-premiers-pas-de-gregal/' | url }}" class="stage-card">
-      <div class="stage-img"><img src="{{ '/thumbs/album/budelli2.jpg' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-img"><img src="{{ '/thumbs/album/budelli2.jpg' | url }}" alt="Plage de Budelli, Sardaigne" loading="lazy"></div>
       <div class="stage-card-body">
         <h3>Méditerranée</h3>
         <p>Sète, Corse, Sardaigne, Baléares, Espagne</p>
@@ -49,7 +49,7 @@ bodyClass: page-home
       </div>
     </a>
     <a href="{{ '/etapes/atlantique/' | url }}" class="stage-card">
-      <div class="stage-img"><img src="{{ '/thumbs/album/DSC_0002.jpg' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-img"><img src="{{ '/thumbs/album/DSC_0002.jpg' | url }}" alt="Navigation vers les Canaries" loading="lazy"></div>
       <div class="stage-card-body">
         <h3>Atlantique</h3>
         <p>Gibraltar, Maroc, Canaries, Cap Vert</p>
@@ -57,7 +57,7 @@ bodyClass: page-home
       </div>
     </a>
     <a href="{{ '/etapes/transat-aller-cap-vert-la-barbade/' | url }}" class="stage-card">
-      <div class="stage-img"><img src="{{ '/thumbs/album/DSC_0594.JPG' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-img"><img src="{{ '/thumbs/album/DSC_0594.JPG' | url }}" alt="En mer, traversée Cap Vert — Barbade" loading="lazy"></div>
       <div class="stage-card-body">
         <h3>Transat aller</h3>
         <p>18 jours en mer, 2 600 milles, Cap Vert → Barbade</p>
@@ -65,7 +65,7 @@ bodyClass: page-home
       </div>
     </a>
     <a href="{{ '/etapes/escales-et-terres-nouvelles/' | url }}" class="stage-card">
-      <div class="stage-img"><img src="{{ '/thumbs/album/view_baradel2.jpg' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-img"><img src="{{ '/thumbs/album/view_baradel2.jpg' | url }}" alt="Île de Baradel, Grenadines" loading="lazy"></div>
       <div class="stage-card-body">
         <h3>Caraïbes</h3>
         <p>Barbade, Martinique, Guadeloupe, Grenade, Grenadines, Antigua…</p>
@@ -73,7 +73,7 @@ bodyClass: page-home
       </div>
     </a>
     <a href="{{ '/etapes/transat-retour-st-martin-bermudes-acores-gibraltar/' | url }}" class="stage-card">
-      <div class="stage-img"><img src="{{ '/thumbs/album/DSC05824.JPG' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-img"><img src="{{ '/thumbs/album/DSC05824.JPG' | url }}" alt="Départ de Saint-Martin, transat retour" loading="lazy"></div>
       <div class="stage-card-body">
         <h3>Transat retour</h3>
         <p>Saint-Martin, Bermudes, Açores, Gibraltar</p>
@@ -81,7 +81,7 @@ bodyClass: page-home
       </div>
     </a>
     <a href="{{ '/etapes/retour-a-sete/' | url }}" class="stage-card">
-      <div class="stage-img"><img src="{{ '/thumbs/album/yawl.jpg' | url }}" alt="" loading="lazy"></div>
+      <div class="stage-img"><img src="{{ '/thumbs/album/yawl.jpg' | url }}" alt="Yawl au coucher de soleil, retour en Méditerranée" loading="lazy"></div>
       <div class="stage-card-body">
         <h3>Retour à Sète</h3>
         <p>Côte espagnole, Gibraltar, Méditerranée</p>
@@ -100,7 +100,7 @@ bodyClass: page-home
     {% for post in cat.posts %}
     <article class="post-card">
       {% if postThumbnails[post.slug] %}
-      <img class="post-card-thumb" src="{{ postThumbnails[post.slug] }}" alt="" loading="lazy">
+      <img class="post-card-thumb" src="{{ postThumbnails[post.slug] }}" alt="{{ post.title }}" loading="lazy">
       {% endif %}
       <div class="post-card-body">
         <div class="post-card-meta">
