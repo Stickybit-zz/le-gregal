@@ -1,0 +1,5 @@
+---
+permalink: /data/track.json
+eleventyExcludeFromCollections: true
+---
+[{% set first = true %}{% for post in posts %}{% if post.gps %}{% if not first %},{% endif %}{"lat":{{ post.gps.lat }},"lon":{{ post.gps.lon }},"title":{{ post.title | tojson | safe }},"slug":{{ post.slug | tojson | safe }},"published":{{ post.published | tojson | safe }}}{% set first = false %}{% endif %}{% endfor %}]
