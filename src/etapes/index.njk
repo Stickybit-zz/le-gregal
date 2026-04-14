@@ -196,5 +196,11 @@ bodyClass: page-explorer
       <span class="theme-name">Bateaux copains</span>
       <span class="theme-count">{{ c.post_count }}</span>
     </a>
+    {% set c = categories | catBySlug("glenans") %}
+    <a href="{{ ('/etapes/glenans/') | url }}" class="theme-card">
+      <span class="theme-icon">🎓</span>
+      <span class="theme-name">Glénans</span>
+      <span class="theme-count">{{ c.post_count }}</span>
+    </a>
   </div>
 </section>
