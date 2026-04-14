@@ -6,6 +6,7 @@
   <title>{% if title %}{{ title }} — {% endif %}Le Grégal</title>
   <meta name="description" content="{% if description %}{{ description }}{% else %}Carnet de bord de Tom &amp; Aude — Méditerranée, Atlantique, Antilles, 2008-2009{% endif %}">
   <link rel="canonical" href="{{ canonicalUrl if canonicalUrl else (site.url ~ page.url) }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url }}/feed.xml">
   <meta property="og:type" content="{{ 'article' if pageType == 'article' else 'website' }}">
   <meta property="og:title" content="{% if title %}{{ title | escape }} — {% endif %}Le Grégal">
   <meta property="og:description" content="{{ (description or site.description) | escape }}">

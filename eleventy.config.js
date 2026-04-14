@@ -40,6 +40,12 @@ export default function (eleventyConfig) {
     return new Date(dateStr).toISOString();
   });
 
+  // RFC 2822 pour RSS
+  eleventyConfig.addFilter("dateRFC", (dateStr) => {
+    if (!dateStr) return "";
+    return new Date(dateStr).toUTCString();
+  });
+
   // Année seule
   eleventyConfig.addFilter("year", (dateStr) => {
     if (!dateStr) return "";
@@ -74,6 +80,8 @@ export default function (eleventyConfig) {
     if (!dateStr) return "";
     return String(dateStr).slice(0, 10);
   });
+
+  eleventyConfig.addFilter("limit", (arr, n) => arr.slice(0, n));
 
   // Sérialise une valeur en JSON (pour JSON-LD)
   eleventyConfig.addFilter("tojson", (val) => JSON.stringify(val ?? ""));
