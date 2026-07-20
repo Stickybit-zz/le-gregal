@@ -161,7 +161,7 @@ main {
   align-items: center;
   justify-content: center;
 }
-.hero-video {
+.hero-image {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -208,10 +208,6 @@ main {
   font-size: .85rem;
   color: rgba(255,255,255,.7);
 }
-@media (prefers-reduced-motion: reduce) {
-  .hero-video { display: none; }
-}
-
 /* ── Cartes Leaflet ───────────────────────────────────────────────────────── */
 .global-map {
   width: 100%;
